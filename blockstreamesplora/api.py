@@ -1,4 +1,5 @@
-from blockstreamesplora import transactions
+from blockstreamesplora import transactions, addresses
+
 
 """
 Transactions API wrapper
@@ -32,10 +33,35 @@ def post_tx(data):
     # response = requests.post(url, data=data)
     # return response
 
+
 """
 Addresses API Wrapper
 """
-# TODO
+
+def get_address(address):
+    return addresses.get(address)
+
+def get_scripthash(hash):
+    return addresses.get_scripthash(hash)
+
+def get_address_tx_history(address, last_seen_txid=None):
+    return addresses.get_tx_history(address, last_seen_txid)
+
+def get_scripthash_tx_history(hash, last_seen_txid=None):
+    return addresses.get_scripthash_tx_history(hash, last_seen_txid)
+
+def get_address_unconfirmed_tx_history(address):
+    return addresses.get_unconfirmed_tx_history(address)
+
+def get_scripthash_unconfirmed_tx_history(hash):
+    return addresses.get_scripthash_unconfirmed_tx_history(hash)
+
+def get_address_utxo(address):
+    return addresses.get_utxo(address)
+
+def get_scripthash_utxo(hash):
+    return addresses.get_scripthash_utxo(hash)
+
 
 """
 Block API Wrapper
