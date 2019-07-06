@@ -1,0 +1,16 @@
+.coverage
+MANIFEST
+coverage.xml
+nosetests.xml
+junit-report.xml
+cover/
+build/
+docs/_build
+requests.egg-info/
+*.pyc
+*.swp
+*.egg
+env/
+venv/
+
+dist
