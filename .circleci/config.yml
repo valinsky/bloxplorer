@@ -16,7 +16,7 @@ version: 2
         - run:
             name: run tests
             command: |
-              python -m pytest --cov
+              python -m pytest --cov .
               coverage report --fail-under=90
         
         # - run:

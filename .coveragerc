@@ -1,0 +1,12 @@
+[paths]
+source = blockstreamesplora
+
+[report]
+show_missing = true
+precision = 2
+omit =
+    *tests*
+    *venv*
+    */constants.py
+    */setup.py
+    */__init__.py
