@@ -49,7 +49,7 @@ class Blocks(Request):
         """
         Returns the 10 newest blocks starting at the tip or at `start_height` if specified.
         """
-        path = f'/block'
+        path = f'blocks'
         if start_height:
             path += f'/{start_height}'
         return self.get_from_path(path)

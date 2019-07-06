@@ -1,3 +1,4 @@
+htmlcov/
 .coverage
 MANIFEST
 coverage.xml

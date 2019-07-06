@@ -1,6 +1,6 @@
 name = "blockstreamesplora"
 
-from .explorer import BitcoinExplorer, LiquidExplorer
+from blockstreamesplora.explorer import BitcoinExplorer, LiquidExplorer
 
 bitcoin_explorer = BitcoinExplorer()
 liquid_explorer = LiquidExplorer()

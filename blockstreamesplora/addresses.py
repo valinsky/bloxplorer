@@ -16,7 +16,7 @@ class Addresses(Request):
         """
         Get information about a scripthash.
         """
-        return self.get_from_path(f'scripthash/{address}')
+        return self.get_from_path(f'scripthash/{hash}')
 
     def get_address_tx_history(self, address, last_seen_txid=None):
         """
@@ -28,7 +28,7 @@ class Addresses(Request):
         # need a check on `last_seen_txid`
         path = f'address/{address}/txs'
         if last_seen_txid:
-            path += '/chain/{last_seen_txid}'
+            path += f'/chain/{last_seen_txid}'
         return self.get_from_path(path)
 
     def get_scripthash_tx_history(self, hash, last_seen_txid=None):
@@ -41,7 +41,7 @@ class Addresses(Request):
         # need a check on `last_seen_txid`
         path = f'scripthash/{hash}/txs'
         if last_seen_txid:
-            path += '/chain/{last_seen_txid}'
+            path += f'/chain/{last_seen_txid}'
         return self.get_from_path(path)
 
     def get_address_unconfirmed_tx_history(self, address):
