@@ -1,10 +1,15 @@
-from blockstreamesplora.utils import get_from_path
+from blockstreamesplora.utils import Request
 
 
-def get():
+class Fees(Request):
     """
-    Get an object where the key is the confirmation target (in number of blocks)
-    and the value is the estimated feerate (in sat/vB).
-    The available confirmation targets are 2, 3, 4, 6, 10, 20, 144, 504 and 1008 blocks.
+    Fee estimates API Wrapper
     """
-    return get_from_path('fee-estimates')
+
+    def get_fee_estimates(self):
+        """
+        Get an object where the key is the confirmation target (in number of blocks)
+        and the value is the estimated feerate (in sat/vB).
+        The available confirmation targets are 2, 3, 4, 6, 10, 20, 144, 504 and 1008 blocks.
+        """
+        return self.get_from_path('fee-estimates')
