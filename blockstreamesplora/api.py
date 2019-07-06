@@ -1,4 +1,4 @@
-from blockstreamesplora import transactions, addresses, blocks
+from blockstreamesplora import transactions, addresses, blocks, mempool, fees
 
 
 """
@@ -95,9 +95,19 @@ def get_last_block_hash():
 """
 Mempool API Wrapper
 """
-# TODO
+
+def get_mempool():
+    return mempool.get()
+
+def get_mempool_txids():
+    return mempool.get_txids()
+
+def get_mempool_latest_txs():
+    return mempool.get_latest_txs()
+
 
 """
 Fee estimates API Wrapper
 """
-# TODO
+def get_fee_estimates():
+    fees.get()
