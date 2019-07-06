@@ -23,7 +23,7 @@ def get_tx_history(address, last_seen_txid=None):
     # need a check on `last_seen_txid`
     path = f'address/{address}/txs'
     if last_seen_txid:
-        path = path + '/chain/{last_seen_txid}'
+        path += '/chain/{last_seen_txid}'
     return get_from_path(path)
 
 def get_scripthash_tx_history(hash, last_seen_txid=None):
@@ -36,7 +36,7 @@ def get_scripthash_tx_history(hash, last_seen_txid=None):
     # need a check on `last_seen_txid`
     path = f'scripthash/{hash}/txs'
     if last_seen_txid:
-        path = path + '/chain/{last_seen_txid}'
+        path += '/chain/{last_seen_txid}'
     return get_from_path(path)
 
 def get_unconfirmed_tx_history(address):

@@ -1,4 +1,4 @@
-from blockstreamesplora import transactions, addresses
+from blockstreamesplora import transactions, addresses, blocks
 
 
 """
@@ -66,7 +66,31 @@ def get_scripthash_utxo(hash):
 """
 Block API Wrapper
 """
-# TODO
+
+def get_block(hash):
+    return blocks.get(hash)
+
+def get_block_status(hash):
+    return blocks.get_status(hash)
+
+def get_block_txs(hash, start_index=None):
+    return blocks.get_txs(hash, start_index)
+
+def get_block_txids(hash):
+    return blocks.get_txids(hash)
+
+def get_block_height(height):
+    return blocks.get_height(height)
+
+def get_blocks(start_height=None):
+    return blocks.get_blocks(start_height)
+
+def get_last_block_height():
+    return blocks.get_last_block_height()
+
+def get_last_block_hash():
+    return blocks.get_last_block_hash()
+
 
 """
 Mempool API Wrapper
