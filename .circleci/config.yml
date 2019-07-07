@@ -1,29 +1,29 @@
 version: 2
-  jobs:
-    build:
-      docker:
-        - image: circleci/python:3.6.4
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6.4
+    
+    steps:
+      - checkout
+      - run:
+          name: install dependencies
+          command: |
+            python3 -m venv venv
+            source venv/bin/activate
+            pip install -r requirements.txt
       
-      steps:
-        - checkout
-        - run:
-            name: install dependencies
-            command: |
-              python3 -m venv venv
-              source venv/bin/activate
-              pip install -r requirements.txt
-        
-        - run:
-            name: run tests
-            command: |
-              python -m pytest --cov .
-              coverage report --fail-under=90
-        
-        # - run:
-        #     name: run linting
-        #     command: |
-        #       flake8 --exclude venv,.egg,.eggs --ignore E501,E127
-        
-        # - store_artifacts:
-        #     path: test-reports
-        #     destination: test-reports
+      - run:
+          name: run tests
+          command: |
+            python -m pytest --cov .
+            coverage report --fail-under=90
+      
+      # - run:
+      #     name: run linting
+      #     command: |
+      #       flake8 --exclude venv,.egg,.eggs --ignore E501,E127
+      
+      # - store_artifacts:
+      #     path: test-reports
+      #     destination: test-reports
