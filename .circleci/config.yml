@@ -23,4 +23,5 @@ jobs:
       - run:
           name: run flake8
           command: |
+            source venv/bin/activate
             flake8 --exclude venv,.egg,.eggs --ignore E501
