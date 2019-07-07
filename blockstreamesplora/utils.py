@@ -3,7 +3,6 @@ from urllib.parse import urljoin
 import requests
 
 from blockstreamesplora.constants import BITCOIN_API_BASE_URL, DEFAULT_TIMEOUT
-from blockstreamesplora.exceptions import BlockstreamExplorerError
 
 
 class Request:

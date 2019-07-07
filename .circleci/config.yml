@@ -20,11 +20,7 @@ jobs:
             python -m pytest --cov .
             coverage report --fail-under=90
       
-      # - run:
-      #     name: run linting
-      #     command: |
-      #       flake8 --exclude venv,.egg,.eggs --ignore E501,E127
-      
-      # - store_artifacts:
-      #     path: test-reports
-      #     destination: test-reports
+      - run:
+          name: run flake8
+          command: |
+            flake8 --exclude venv,.egg,.eggs --ignore E501
