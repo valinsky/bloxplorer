@@ -16,6 +16,7 @@ jobs:
       - run:
           name: run tests
           command: |
+            source venv/bin/activate
             python -m pytest --cov .
             coverage report --fail-under=90
       
