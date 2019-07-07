@@ -1,0 +1,2 @@
+class BlockstreamExplorerError(Exception):
+    pass

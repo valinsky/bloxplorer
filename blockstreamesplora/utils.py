@@ -2,7 +2,8 @@ from urllib.parse import urljoin
 
 import requests
 
-from blockstreamesplora.constants import BITCOIN_API_BASE_URL
+from blockstreamesplora.constants import BITCOIN_API_BASE_URL, DEFAULT_TIMEOUT
+from blockstreamesplora.exceptions import BlockstreamExplorerError
 
 
 class Request:
@@ -14,22 +15,9 @@ class Request:
         return self._get(url, **kwargs)
 
     @staticmethod
-    def _get(url, timeout=5, headers=None, **kwargs):
-        error_message = ''
-
+    def _get(url, timeout=DEFAULT_TIMEOUT, headers=None, **kwargs):
         try:
             response = requests.get(url, timeout=timeout, headers=headers)
-        except requests.exceptions.ConnectionError as e:
-            # raise
-            error_message = f'Network failure: {e}'
-        except requests.exceptions.Timeout as e:
-            # raise
-            error_message = f'Request timed out: {e}'
-        except requests.exceptions.RequestException as e:
-            # raise
-            error_message = f'Request failure: {e}'
-        
-        if error_message:
-            print(error_message)
-        
+        except requests.exceptions.RequestException:
+            raise
         return response
