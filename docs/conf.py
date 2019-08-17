@@ -23,7 +23,7 @@ copyright = '2019, Dumitru Valeriu Voicu'
 author = 'Dumitru Valeriu Voicu'
 
 # The full version, including alpha/beta/rc tags
-release = '1.0'
+release = ''
 
 
 # -- General configuration ---------------------------------------------------
@@ -32,7 +32,8 @@ release = '1.0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc'
+    'sphinx.ext.autodoc',
+    'sphinx.ext.githubpages'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
