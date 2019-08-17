@@ -1,0 +1,103 @@
+from bloxplorer.utils import Request
+
+
+class Blocks(Request):
+    """
+    Wrapper class around the Esplora Blocks endpoint.
+
+    `Blockstream Esplora Blocks API Docs
+    <https://github.com/Blockstream/esplora/blob/master/API.md#blocks>`_
+    """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # self.cache = {}
+
+    def get(self, hash):
+        """
+        Returns information about a block.
+        The response from this endpoint can be cached indefinitely.
+
+        :param hash: String representing the block hash.
+
+        :return: :class: `Response` object.
+        """
+        return self.make_request('GET', f'block/{hash}')
+
+    def get_status(self, hash):
+        """
+        Returns information about the block status.
+        The response from this endpoint can be cached indefinitely.
+
+        :param hash: String representing the block hash.
+
+        :return: :class: `Response` object.
+        """
+        return self.make_request('GET', f'block/{hash}/status')
+
+    def get_txs(self, hash, start_index=None):
+        """
+        Returns a list of transactions in the block (up to 25 transactions beginning at start_index).
+        Transactions returned here do not have the status field, since all the transactions share the
+        same block and confirmation status.
+        The response from this endpoint can be cached indefinitely.
+
+        :param hash: String representing the block hash.
+        :param start_index: (Optional) Integer representing the transaction start index.
+
+        :return: :class: `Response` object.
+        """
+        path = f'block/{hash}/txs'
+        if start_index is not None:
+            path += f'/{start_index}'
+        return self.make_request('GET', path)
+
+    def get_txids(self, hash):
+        """
+        Returns a list of all txids in the block.
+        The response from this endpoint can be cached indefinitely.
+
+        :param hash: String representing the block hash.
+
+        :return: :class: `Response` object.
+        """
+        return self.make_request('GET', f'block/{hash}/txids')
+
+    def get_height(self, height):
+        """
+        Returns the hash of the block currently at `height`.
+
+        :param height: Integer representing the block height.
+
+        :return: :class: `Response` object.
+        """
+        return self.make_request('GET', f'block-height/{height}')
+
+    def get_blocks(self, start_height=None):
+        """
+        Returns the 10 newest blocks starting at the tip or at `start_height` if specified.
+
+        :param start_height: (Optional) Integer representing the block height.
+
+        :return: :class: `Response` object.
+        """
+        path = f'blocks'
+        if start_height is not None:
+            path += f'/{start_height}'
+        return self.make_request('GET', path)
+
+    def get_last_height(self):
+        """
+        Returns the height of the last block.
+
+        :return: :class: `Response` object.
+        """
+        return self.make_request('GET', 'blocks/tip/height')
+
+    def get_last_hash(self):
+        """
+        Returns the hash of the last block.
+
+        :return: :class: `Response` object.
+        """
+        return self.make_request('GET', 'blocks/tip/hash')
