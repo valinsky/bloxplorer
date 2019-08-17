@@ -38,7 +38,7 @@ Tips
 
 Tips: `3NRWkeb9HtQn6sGHNyAXhkcoCcUwstpdBb`
 
-.. |circle| image:: https://circleci.com/gh/valinsky/bloxplorer/tree/master.svg?style=svg
+.. |circle| image:: https://circleci.com/gh/valinsky/bloxplorer/tree/master.svg?style=shield
     :target: https://circleci.com/gh/valinsky/bloxplorer/tree/master
 
 .. |version| image:: https://img.shields.io/pypi/v/nine?logo=bloxplorer

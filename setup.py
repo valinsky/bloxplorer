@@ -8,7 +8,7 @@ setuptools.setup(
     version='0.1.1',
     description='Bitcoin and Liquid blockchain explorer',
     long_description=readme,
-    long_description_content_type='text/markdown',
+    long_description_content_type='text/x-rst',
     author='Dumitru Valeriu Voicu',
     author_email='valinsky@protonmail.com',
     url='https://github.com/valinsky/bloxplorer',
