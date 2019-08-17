@@ -21,6 +21,8 @@ Using the Bloxplorer package is easy and straightforward, as it should be.
     print(response.data)
     '586438'
 
+Full documentation is available at https://valinsky.github.io/bloxplorer/
+
 Installation
 ------------
 
@@ -28,17 +30,21 @@ To install the Bloxplorer package just run this command in your favorite termina
 
 >>> pip install bloxplorer
 
-Documentation
--------------
+Links
+-----
 
-Full documentation is avaliable at https://valinsky.github.io/bloxplorer/.
+* Documentation: https://valinsky.github.io/bloxplorer/
+* GitHub: https://github.com/valinsky/bloxplorer
+* Pypi: https://pypi.org/project/bloxplorer
+* CircleCI: https://circleci.com/gh/valinsky/bloxplorer/tree/master
+* License: https://github.com/valinsky/bloxplorer/blob/master/LICENSE
 
 Tips
 ----
 
 You already know :) 
 
-Bitcoin address: **3NRWkeb9HtQn6sGHNyAXhkcoCcUwstpdBb**
+฿itcoin address: **3NRWkeb9HtQn6sGHNyAXhkcoCcUwstpdBb**
 
 Thank you!!
 
