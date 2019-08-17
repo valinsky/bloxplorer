@@ -1,8 +1,6 @@
 from bloxplorer.explorer import BitcoinExplorer, LiquidExplorer, BitcoinTestnetExplorer
 
 
-__version__ = '0.1.0'
-
 """
 Usage::
 

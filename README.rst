@@ -31,18 +31,22 @@ To install the Bloxplorer package just run this command in your favorite termina
 Documentation
 -------------
 
-Full documentation is avaliable at http://docs.python-bloxplorer.org/.
+Full documentation is avaliable at https://valinsky.github.io/bloxplorer/.
 
 Tips
 ----
 
-Tips: `3NRWkeb9HtQn6sGHNyAXhkcoCcUwstpdBb`
+You already know :) 
 
-.. |circle| image:: https://circleci.com/gh/valinsky/bloxplorer/tree/master.svg?style=svg
+Bitcoin address: **3NRWkeb9HtQn6sGHNyAXhkcoCcUwstpdBb**
+
+Thank you!!
+
+.. |circle| image:: https://circleci.com/gh/valinsky/bloxplorer/tree/master.svg?style=shield
     :target: https://circleci.com/gh/valinsky/bloxplorer/tree/master
 
-.. |version| image:: https://img.shields.io/pypi/v/nine?logo=bloxplorer
+.. |version| image:: https://img.shields.io/badge/version-0.1.1-blue
     :target: https://pypi.org/project/bloxplorer/
 
 .. |MIT license| image:: https://img.shields.io/badge/license-MIT-orange
-    :target: https://pypi.org/project/bloxplorer/
+    :target:  https://github.com/valinsky/bloxplorer/blob/master/LICENSE
