@@ -64,11 +64,14 @@
 <p><a class="reference external" href="https://github.com/Blockstream/esplora/blob/master/API.md#mempool">Blockstream Esplora Mempool API Docs</a></p>
 <dl class="method">
 <dt id="bloxplorer.mempool.Mempool.get">
-<code class="sig-name descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bloxplorer.mempool.Mempool.get" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#bloxplorer.mempool.Mempool.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get mempool backlog statistics.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – (Optional) Arguments that <cite>Requests</cite> takes.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
 <dt class="field-odd">class</dt>
 <dd class="field-odd"><p><cite>Response</cite> object.</p>
 </dd>
@@ -80,11 +83,14 @@
 
 <dl class="method">
 <dt id="bloxplorer.mempool.Mempool.get_latest_txs">
-<code class="sig-name descname">get_latest_txs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bloxplorer.mempool.Mempool.get_latest_txs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_latest_txs</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#bloxplorer.mempool.Mempool.get_latest_txs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a list of the last 10 transactions to enter the mempool.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – (Optional) Arguments that <cite>Requests</cite> takes.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="field-list simple">
 <dt class="field-odd">class</dt>
 <dd class="field-odd"><p><cite>Response</cite> object.</p>
 </dd>
@@ -96,32 +102,12 @@
 
 <dl class="method">
 <dt id="bloxplorer.mempool.Mempool.get_txids">
-<code class="sig-name descname">get_txids</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bloxplorer.mempool.Mempool.get_txids" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_txids</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#bloxplorer.mempool.Mempool.get_txids" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the full list of txids in the mempool as an array.
 The order of the txids is arbitrary and does not match bitcoind’s.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><dl class="field-list simple">
-<dt class="field-odd">class</dt>
-<dd class="field-odd"><p><cite>Response</cite> object.</p>
-</dd>
-</dl>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="bloxplorer.mempool.Mempool.make_request">
-<code class="sig-name descname">make_request</code><span class="sig-paren">(</span><em class="sig-param">method</em>, <em class="sig-param">path</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#bloxplorer.mempool.Mempool.make_request" title="Permalink to this definition">¶</a></dt>
-<dd><p>Send a GET request to the Esplora endpoint specified by <cite>path</cite>.</p>
-<dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>method</strong> – The request method (get or post).</p></li>
-<li><p><strong>path</strong> – String representing the URL resource path.</p></li>
-<li><p><strong>**kwargs</strong> – (Optional) Arguments that <cite>Requests</cite> takes.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>**kwargs</strong> – (Optional) Arguments that <cite>Requests</cite> takes.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><dl class="field-list simple">

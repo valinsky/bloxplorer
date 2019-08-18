@@ -78,8 +78,31 @@ of its associated methods. The available explorers are Bitcoin, Liquid and Bitco
 <p>For a full list of available API methods <a class="reference internal" href="api.html#api"><span class="std std-ref">click here</span></a>.</p>
 </div>
 </div>
+<div class="section" id="timeouts">
+<h2>1.3. Timeouts<a class="headerlink" href="#timeouts" title="Permalink to this headline">¶</a></h2>
+<p>You can tell Bloxplorer to stop waiting for a response from the Blockstream API after
+a given number of seconds with the <strong>timeout</strong> parameter.
+By default the timeout is set to 5 seconds.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bitcoin_explorer</span><span class="o">.</span><span class="n">blocks</span><span class="o">.</span><span class="n">get_blocks</span><span class="p">(</span><span class="n">start_height</span><span class="o">=</span><span class="s1">&#39;587840&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exceptions">
+<h2>1.4. Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
+<p>There are 2 different types of exceptions that can be raised, client and API exceptions.</p>
+<p><strong>Client Exceptions</strong></p>
+<p>In the event of a network problem (e.g. DNS failure, refused connection, etc),
+BlockstreamClientNetworkError will be raised.</p>
+<p>In the event of a Timeout, BlockstreamClientTimeout will be raised.</p>
+<p>For anything else, Bloxplorer will raise a BlockstreamClientError.</p>
+<p>These exceptions will be accompanied by the error message, the resource url and the http method.</p>
+<p><strong>API Exceptions</strong></p>
+<p>In the event of an API error (e.g. Invalid resource, Bad Request, etc), Bloxplorer will
+raise BlockstreamApiError.</p>
+<p>This exception will provide the same data as the Client exceptions, alongside the status code.</p>
+</div>
 <div class="section" id="source-code">
-<h2>1.3. Source Code<a class="headerlink" href="#source-code" title="Permalink to this headline">¶</a></h2>
+<h2>1.5. Source Code<a class="headerlink" href="#source-code" title="Permalink to this headline">¶</a></h2>
 <p>Bloxplorer is available on GitHub -&gt; <a class="reference external" href="https://github.com/valinsky/bloxplorer">right here</a>.</p>
 <p>Clone the public repository:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">valinsky</span><span class="o">/</span><span class="n">bloxplorer</span><span class="o">.</span><span class="n">git</span>
@@ -87,7 +110,7 @@ of its associated methods. The available explorers are Bitcoin, Liquid and Bitco
 </div>
 </div>
 <div class="section" id="dependencies">
-<h2>1.4. Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<h2>1.6. Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
 <p>Bloxplorer uses the beautiful <a class="reference external" href="https://github.com/requests/requests">Requests</a> package for
 its HTTP calls. Big shout out to the <a class="reference external" href="https://github.com/requests/requests">Requests</a> team.</p>
 </div>
@@ -114,8 +137,10 @@ its HTTP calls. Big shout out to the <a class="reference external" href="https:/
 <li class="toctree-l1 current"><a class="current reference internal" href="#">1. Quickstart</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#setup">1.1. Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#usage">1.2. Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#source-code">1.3. Source Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#dependencies">1.4. Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#timeouts">1.3. Timeouts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exceptions">1.4. Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#source-code">1.5. Source Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">1.6. Dependencies</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">2. API Documentation</a></li>

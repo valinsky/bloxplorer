@@ -18,7 +18,7 @@ class Request:
 
     def make_request(self, method, path, **kwargs):
         r"""
-        Send a GET request to the Esplora endpoint specified by `path`.
+        Send an http request to the Esplora endpoint specified by `path`.
 
         :param method: The request method (get or post).
         :param path: String representing the URL resource path.
@@ -31,11 +31,11 @@ class Request:
 
     def _request(self, method, url, timeout=DEFAULT_TIMEOUT, **kwargs):
         r"""
-        Helper method that sends a GET request and handles the response.
+        Helper method that sends an http request and handles the response.
 
         :param method: The request method (get or post).
         :param url: String representing the resource URL.
-        :param timeout: (Optional) The request timeout.
+        :param timeout: (Optional) The request timeout. Default is 5 seconds.
         :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
 
         :return: :class: `Response` object.

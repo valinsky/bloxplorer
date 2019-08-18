@@ -38,4 +38,4 @@ Usage
     """
 
 .. autoclass:: bloxplorer.addresses.Addresses
-    :inherited-members:
+    :members:

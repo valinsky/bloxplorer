@@ -61,4 +61,4 @@ Usage
     """
 
 .. autoclass:: bloxplorer.transactions.Transactions
-    :inherited-members:
+    :members:

@@ -53,6 +53,38 @@ Bitcoin Testnet Explorer
 
 For a full list of available API methods :ref:`click here <api>`.
 
+Timeouts
+********
+
+You can tell Bloxplorer to stop waiting for a response from the Blockstream API after 
+a given number of seconds with the **timeout** parameter. 
+By default the timeout is set to 5 seconds.
+
+    >>> bitcoin_explorer.blocks.get_blocks(start_height='587840', timeout=3)
+
+Exceptions
+**********
+
+There are 2 different types of exceptions that can be raised, client and API exceptions.
+
+**Client Exceptions**
+
+In the event of a network problem (e.g. DNS failure, refused connection, etc), 
+BlockstreamClientNetworkError will be raised.
+
+In the event of a Timeout, BlockstreamClientTimeout will be raised.
+
+For anything else, Bloxplorer will raise a BlockstreamClientError.
+
+These exceptions will be accompanied by the error message, the resource url and the http method.
+
+**API Exceptions**
+
+In the event of an API error (e.g. Invalid resource, Bad Request, etc), Bloxplorer will
+raise BlockstreamApiError.
+
+This exception will provide the same data as the Client exceptions, alongside the status code.
+
 Source Code
 ***********
 

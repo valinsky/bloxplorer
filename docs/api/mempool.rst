@@ -30,4 +30,4 @@ Usage
     """
 
 .. autoclass:: bloxplorer.mempool.Mempool
-    :inherited-members:
+    :members:

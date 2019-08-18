@@ -51,7 +51,7 @@ Thank you!!
 .. |circle| image:: https://circleci.com/gh/valinsky/bloxplorer/tree/master.svg?style=shield
     :target: https://circleci.com/gh/valinsky/bloxplorer/tree/master
 
-.. |version| image:: https://img.shields.io/badge/version-0.1.1-blue
+.. |version| image:: https://img.shields.io/badge/version-0.1.2-blue
     :target: https://pypi.org/project/bloxplorer/
 
 .. |MIT license| image:: https://img.shields.io/badge/license-MIT-orange
