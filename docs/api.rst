@@ -27,6 +27,10 @@ After you import an explorer, you can use the API by following this notation:
 
     >>> explorer.property.method(*args, **kwargs)
 
+Example:
+
+    >>> bitcoin_explorer.blocks.get_blocks(start_height='587840')
+
 The set of properties available are : *addr*, *tx*, *blocks*, *fees*, *mempool*, *assets*
 
 All the available resource methods are documented below:
@@ -40,3 +44,4 @@ All the available resource methods are documented below:
     api/mempool
     api/fee_estimates
     api/issued_assets
+

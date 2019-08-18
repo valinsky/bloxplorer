@@ -30,4 +30,4 @@ Usage
     """
 
 .. autoclass:: bloxplorer.fees.Fees
-    :inherited-members:
+    :members:

@@ -13,49 +13,53 @@ class IssuedAssets(Request):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def get(self, asset_id):
-        """
+    def get(self, asset_id, **kwargs):
+        r"""
         Get information about an issued assets.
 
         :param asset_id: String representing the issued asset hash.
+        :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'asset/{asset_id}')
+        return self.make_request('GET', f'asset/{asset_id}', **kwargs)
 
-    def get_txs(self, asset_id):
-        """
+    def get_txs(self, asset_id, **kwargs):
+        r"""
         Returns the list of (re)issuance and burn transactions associated with this asset id.
         Does not include regular transactions transferring this asset.
 
         :param asset_id: String representing the issued asset hash.
+        :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'asset/{asset_id}/txs')
+        return self.make_request('GET', f'asset/{asset_id}/txs', **kwargs)
 
-    def get_mempool(self, asset_id):
-        """
+    def get_mempool(self, asset_id, **kwargs):
+        r"""
         Returns the list of (re)issuance and burn transactions associated with this asset id.
         Does not include regular transactions transferring this asset.
 
         :param asset_id: String representing the issued asset hash.
+        :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'asset/{asset_id}/txs/mempool')
+        return self.make_request('GET', f'asset/{asset_id}/txs/mempool', **kwargs)
 
-    def get_chain(self, asset_id, last_seen=None):
-        """
+    def get_chain(self, asset_id, last_seen=None, **kwargs):
+        r"""
         Returns the list of (re)issuance and burn transactions associated with this asset id.
         Does not include regular transactions transferring this asset.
 
         :param asset_id: String representing the issued asset hash.
-        :param last_seen: TODO
+        :param last_seen:
+        :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
 
         :return: :class: `Response` object.
         """
         path = f'asset/{asset_id}/txs/chain'
         if last_seen:
             path += f'/{last_seen}'
-        return self.make_request('GET', path)
+        return self.make_request('GET', path, **kwargs)

@@ -32,4 +32,4 @@ Usage
     """
 
 .. autoclass:: bloxplorer.blocks.Blocks
-    :inherited-members:
+    :members:

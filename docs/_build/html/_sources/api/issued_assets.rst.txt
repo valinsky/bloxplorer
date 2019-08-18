@@ -16,4 +16,4 @@ Usage
     print(result.data)
 
 .. autoclass:: bloxplorer.issued_assets.IssuedAssets
-    :inherited-members:
+    :members:
