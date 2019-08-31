@@ -15,7 +15,7 @@ class IssuedAssets(Request):
 
     def get(self, asset_id, **kwargs):
         r"""
-        Get information about an issued assets.
+        Get information about an issued asset.
 
         :param asset_id: String representing the issued asset hash.
         :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
