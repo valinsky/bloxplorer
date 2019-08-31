@@ -58,4 +58,4 @@ Thank you!!
     :target:  https://github.com/valinsky/bloxplorer/blob/master/LICENSE
 
 .. |downloads| image:: https://pepy.tech/badge/bloxplorer
-    :target: https://pypi.org/project/bloxplorer/
+    :target: https://pepy.tech/project/bloxplorer/
