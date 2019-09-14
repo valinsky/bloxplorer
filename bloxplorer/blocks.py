@@ -55,17 +55,20 @@ class Blocks(Request):
             path += f'/{start_index}'
         return self.make_request('GET', path, **kwargs)
 
-    def get_txids(self, hash, **kwargs):
+    def get_txids(self, hash, index=None, **kwargs):
         r"""
         Returns a list of all txids in the block.
+        If `index` is present, return the transaction at index `index` within the specified block.
         The response from this endpoint can be cached indefinitely.
 
         :param hash: String representing the block hash.
+        :param index: (Optional) Integer representing the index within a block.
         :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'block/{hash}/txids', **kwargs)
+        path = f'block/{hash}/txid/{index}' if index is not None else f'block/{hash}/txids'
+        return self.make_request('GET', path, **kwargs)
 
     def get_height(self, height, **kwargs):
         r"""

@@ -38,10 +38,15 @@ def test_get_block_txs(hash, start_index, expected_url):
     blocks.make_request.assert_called_with('GET', expected_url)
 
 
-def test_get_block_txids():
+@pytest.mark.parametrize(
+    'hash, index, expected_url', (
+        ('1234', None, 'block/1234/txids'),
+        ('1234', 10, 'block/1234/txid/10')
+    ))
+def test_get_block_txids(hash, index, expected_url):
     hash = '1234'
-    blocks.get_txids(hash)
-    blocks.make_request.assert_called_with('GET', f'block/{hash}/txids')
+    blocks.get_txids(hash, index)
+    blocks.make_request.assert_called_with('GET', expected_url)
 
 
 def test_get_block_height():

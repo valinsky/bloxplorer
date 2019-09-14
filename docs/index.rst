@@ -1,7 +1,7 @@
 Bloxplorer - Bitcoin and Liquid Blockchain Explorer
 ===================================================
 
-|circle| |version| |license|
+|circle| |version| |license| |downloads|
 
 :ref:`Quickstart <quickstart>`
 
@@ -9,7 +9,7 @@ Bloxplorer - Bitcoin and Liquid Blockchain Explorer
 **Bloxplorer** is a simple yet very effective Bitcoin and Liquid blockchain explorer.
 
 It allows developers to make use of the full power of the `Blockstream Esplora HTTP API 
-<https://github.com/Blockstream/esplora>`_ through a clean Python interface.
+<https://github.com/Blockstream/esplora/blob/master/API.md>`_ through a clean Python interface.
 
 .. code-block:: python
 
@@ -23,12 +23,14 @@ It allows developers to make use of the full power of the `Blockstream Esplora H
 .. |circle| image:: https://circleci.com/gh/valinsky/bloxplorer/tree/master.svg?style=shield
     :target: https://circleci.com/gh/valinsky/bloxplorer/tree/master
 
-.. |version| image:: https://img.shields.io/badge/version-0.1.2-blue
+.. |version| image:: https://img.shields.io/badge/version-0.1.3-blue
     :target: https://pypi.org/project/bloxplorer/
 
 .. |license| image:: https://img.shields.io/badge/license-MIT-orange
     :target: https://github.com/valinsky/bloxplorer/blob/master/LICENSE
 
+.. |downloads| image:: https://pepy.tech/badge/bloxplorer
+    :target: https://pepy.tech/project/bloxplorer/
 
 .. toctree::
     :maxdepth: 2
