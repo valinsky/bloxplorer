@@ -1,5 +1,10 @@
-Bloxplorer
-==========
+*************************
+🔥🔥🔥 Bloxplorer 🔥🔥🔥 
+*************************
+
+======================================
+Bitcoin and Liquid Blockchain Explorer
+======================================
 
 |circle| |version| |license| |downloads|
 
@@ -46,7 +51,7 @@ You already know :)
 
 ฿itcoin address: **3NRWkeb9HtQn6sGHNyAXhkcoCcUwstpdBb**
 
-Thank you!!
+Thank you!! 🙏
 
 .. |circle| image:: https://circleci.com/gh/valinsky/bloxplorer/tree/master.svg?style=shield
     :target: https://circleci.com/gh/valinsky/bloxplorer/tree/master
