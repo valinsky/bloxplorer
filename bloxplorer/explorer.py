@@ -42,7 +42,7 @@ class BitcoinExplorer(Explorer):
         """
         Get the Bitcoin address type.
         
-        :param address: The alphanumeric Bitcoin
+        :param address: The alphanumeric Bitcoin address
 
         :return: String representing the address type (P2PKH, P2SH, etc.)
         """
@@ -75,7 +75,7 @@ class BitcoinTestnetExplorer(Explorer):
         """
         Get the Bitcoin Testnet address type.
         
-        :param address: The alphanumeric Bitcoin
+        :param address: The alphanumeric Bitcoin address
 
         :return: String representing the address type (P2PKH, P2SH, etc.)
         """
