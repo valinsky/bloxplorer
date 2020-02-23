@@ -21,7 +21,7 @@ jobs:
           name: run tests
           command: |
             source venv/bin/activate
-            python -m pytest --cov . --cov-fail-under=90
+            python -m pytest --cov . --cov-fail-under=98
 
       - run:
           name: run flake8
