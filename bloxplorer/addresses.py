@@ -142,3 +142,15 @@ class Addresses(Request):
         :return: :class: `Response` object.
         """
         return self.make_request('GET', f'scripthash/{hash}/utxo', **kwargs)
+
+    @staticmethod
+    def get_address_type(address):
+        """
+        Get the Bitcoin address type.
+        Not available for Liquid.
+        
+        :param address: The alphanumeric Bitcoin
+
+        :return: String representing the address type (P2PKH, P2SH, etc.)
+        """
+        raise NotImplementedError
