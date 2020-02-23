@@ -153,4 +153,4 @@ class Addresses(Request):
 
         :return: String representing the address type (P2PKH, P2SH, etc.)
         """
-        raise NotImplementedError
+        pass
