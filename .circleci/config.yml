@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.4
-    
+
     branches:
       ignore:
         - gh-pages
@@ -15,14 +15,14 @@ jobs:
           command: |
             python3 -m venv venv
             source venv/bin/activate
-            pip install -r requirements/dev.txt
-      
+            pip install -r requirements/test.txt
+
       - run:
           name: run tests
           command: |
             source venv/bin/activate
             python -m pytest --cov . --cov-fail-under=90
-      
+
       - run:
           name: run flake8
           command: |
