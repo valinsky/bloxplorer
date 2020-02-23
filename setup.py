@@ -5,7 +5,7 @@ with open('README.rst', 'r') as f:
 
 setuptools.setup(
     name='bloxplorer',
-    version='0.1.3',
+    version='0.1.4',
     description='Bitcoin and Liquid blockchain explorer',
     long_description=readme,
     author='Dumitru Valeriu Voicu',
@@ -15,7 +15,7 @@ setuptools.setup(
     packages=['bloxplorer'],
     include_package_data=True,
     install_requires=['requests'],
-    test_suite="tests",
+    test_suite='tests',
     tests_require=['pytest'],
     classifiers=[
         'Programming Language :: Python :: 3.6',
