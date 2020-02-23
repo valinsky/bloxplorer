@@ -1,5 +1,6 @@
 from bloxplorer.constants import (
-    BITCOIN_API_BASE_URL, LIQUID_API_BASE_URL, BITCOIN_TESTNET_API_BASE_URL
+    BITCOIN_API_BASE_URL, LIQUID_API_BASE_URL, BITCOIN_TESTNET_API_BASE_URL, P2PKH, P2SH, BECH32,
+    BIP32_PUBKEY, BIP32_PRVKEY, UNRECOGNIZED_ADDRESS_TYPE
 )
 from bloxplorer.addresses import Addresses
 from bloxplorer.blocks import Blocks
@@ -9,10 +10,12 @@ from bloxplorer.mempool import Mempool
 from bloxplorer.transactions import Transactions
 
 
-class BitcoinExplorer:
+class Explorer:
     """
-    Wrapper class around the Bitcoin Esplora API.
+    Parent Explorer class.
+    Uses the Bitcoin API URL as default.
     """
+
     BASE_URL = BITCOIN_API_BASE_URL
 
     def __init__(self):
@@ -21,26 +24,83 @@ class BitcoinExplorer:
         self.blocks = Blocks(self.BASE_URL)
         self.fees = Fees(self.BASE_URL)
         self.mempool = Mempool(self.BASE_URL)
-
+    
     @property
     def base_url(self):
         return self.BASE_URL
 
 
-class BitcoinTestnetExplorer(BitcoinExplorer):
-    """
-    Wrapper class around the Bitcoin Testnet Esplora API.
-    """
-    BASE_URL = BITCOIN_TESTNET_API_BASE_URL
+class BitcoinExplorer(Explorer):
+
+    BASE_URL = BITCOIN_API_BASE_URL
 
     def __init__(self):
         super().__init__()
 
+    @staticmethod
+    def get_address_type(address):
+        """
+        Get the Bitcoin address type.
+        
+        :param address: The alphanumeric Bitcoin
 
-class LiquidExplorer(BitcoinExplorer):
+        :return: String representing the address type (P2PKH, P2SH, etc.)
+        """
+        if isinstance(address, bytes):
+            address = address.decode()
+
+        if address[0] == '1':
+            return P2PKH
+        if address[0] == '3':
+            return P2SH
+        if address[:3] == 'bc1':
+            return BECH32
+        if address[:4] == 'xpub':
+            return BIP32_PUBKEY
+        if address[:4] == 'xprv':
+            return BIP32_PRVKEY
+
+        return UNRECOGNIZED_ADDRESS_TYPE
+
+
+class BitcoinTestnetExplorer(Explorer):
+
+    BASE_URL = BITCOIN_TESTNET_API_BASE_URL
+
+    def __init__(self):
+        super().__init__()
+    
+    @staticmethod
+    def get_address_type(address):
+        """
+        Get the Bitcoin Testnet address type.
+        
+        :param address: The alphanumeric Bitcoin
+
+        :return: String representing the address type (P2PKH, P2SH, etc.)
+        """
+        if isinstance(address, bytes):
+            address = address.decode()
+
+        if address[0] in ('m', 'n'):
+            return P2PKH
+        if address[0] == '2':
+            return P2SH
+        if address[:3] == 'tb1':
+            return BECH32
+        if address[:4] == 'tpub':
+            return BIP32_PUBKEY
+        if address[:4] == 'tprv':
+            return BIP32_PRVKEY
+
+        return UNRECOGNIZED_ADDRESS_TYPE
+
+
+class LiquidExplorer(Explorer):
     """
-    Wrapper class around the Liquid Esplora API.
+    Liquid also uses the Issued Assets feature.
     """
+
     BASE_URL = LIQUID_API_BASE_URL
 
     def __init__(self):
