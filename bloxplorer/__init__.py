@@ -1,6 +1,5 @@
 from bloxplorer.explorer import BitcoinExplorer, BitcoinTestnetExplorer, LiquidExplorer
 
-
 """
 Usage::
 

@@ -3,7 +3,6 @@ from unittest.mock import MagicMock
 from bloxplorer.constants import BITCOIN_API_BASE_URL
 from bloxplorer.fees import Fees
 
-
 Fees.make_request = MagicMock()
 fees = Fees(BITCOIN_API_BASE_URL)
 

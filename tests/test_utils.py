@@ -1,14 +1,15 @@
 import json
+
 from unittest.mock import MagicMock
 from urllib.parse import urljoin
 
 import pytest
 import requests
 
-from bloxplorer.constants import DEFAULT_TIMEOUT, CONTENT_TYPE_JSON, CONTENT_TYPE_TEXT
+from bloxplorer.constants import CONTENT_TYPE_JSON, CONTENT_TYPE_TEXT, DEFAULT_TIMEOUT
 from bloxplorer.exceptions import (
-    BlockstreamApiError, BlockstreamClientError, BlockstreamClientTimeout,
-    BlockstreamClientNetworkError
+    BlockstreamApiError, BlockstreamClientError, BlockstreamClientNetworkError,
+    BlockstreamClientTimeout
 )
 from bloxplorer.utils import Request
 

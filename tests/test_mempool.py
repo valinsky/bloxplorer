@@ -3,7 +3,6 @@ from unittest.mock import MagicMock
 from bloxplorer.constants import BITCOIN_API_BASE_URL
 from bloxplorer.mempool import Mempool
 
-
 Mempool.make_request = MagicMock()
 mempool = Mempool(BITCOIN_API_BASE_URL)
 

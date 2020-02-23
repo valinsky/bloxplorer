@@ -1,10 +1,10 @@
 import pytest
 
-from bloxplorer.constants import (
-    BITCOIN_API_BASE_URL, LIQUID_API_BASE_URL, BITCOIN_TESTNET_API_BASE_URL, P2PKH, P2SH, BECH32,
-    BIP32_PUBKEY, BIP32_PRVKEY, UNRECOGNIZED_ADDRESS_TYPE
-)
 from bloxplorer import bitcoin_explorer, bitcoin_testnet_explorer, liquid_explorer
+from bloxplorer.constants import (
+    BECH32, BIP32_PRVKEY, BIP32_PUBKEY, BITCOIN_API_BASE_URL, BITCOIN_TESTNET_API_BASE_URL,
+    LIQUID_API_BASE_URL, P2PKH, P2SH, UNRECOGNIZED_ADDRESS_TYPE
+)
 
 
 def test_base_url():

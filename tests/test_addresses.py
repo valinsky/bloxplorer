@@ -2,9 +2,8 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from bloxplorer.constants import BITCOIN_API_BASE_URL
 from bloxplorer.addresses import Addresses
-
+from bloxplorer.constants import BITCOIN_API_BASE_URL
 
 Addresses.make_request = MagicMock()
 addresses = Addresses(BITCOIN_API_BASE_URL)

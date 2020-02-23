@@ -5,7 +5,6 @@ import pytest
 from bloxplorer.constants import BITCOIN_API_BASE_URL
 from bloxplorer.issued_assets import IssuedAssets
 
-
 IssuedAssets.make_request = MagicMock()
 assets = IssuedAssets(BITCOIN_API_BASE_URL)
 

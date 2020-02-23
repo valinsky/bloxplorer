@@ -1,9 +1,9 @@
-from bloxplorer.constants import (
-    BITCOIN_API_BASE_URL, LIQUID_API_BASE_URL, BITCOIN_TESTNET_API_BASE_URL, P2PKH, P2SH, BECH32,
-    BIP32_PUBKEY, BIP32_PRVKEY, UNRECOGNIZED_ADDRESS_TYPE
-)
 from bloxplorer.addresses import Addresses
 from bloxplorer.blocks import Blocks
+from bloxplorer.constants import (
+    BECH32, BIP32_PRVKEY, BIP32_PUBKEY, BITCOIN_API_BASE_URL, BITCOIN_TESTNET_API_BASE_URL,
+    LIQUID_API_BASE_URL, P2PKH, P2SH, UNRECOGNIZED_ADDRESS_TYPE
+)
 from bloxplorer.fees import Fees
 from bloxplorer.issued_assets import IssuedAssets
 from bloxplorer.mempool import Mempool
@@ -24,7 +24,7 @@ class Explorer:
         self.blocks = Blocks(self.BASE_URL)
         self.fees = Fees(self.BASE_URL)
         self.mempool = Mempool(self.BASE_URL)
-    
+
     @property
     def base_url(self):
         return self.BASE_URL
@@ -41,7 +41,7 @@ class BitcoinExplorer(Explorer):
     def get_address_type(address):
         """
         Get the Bitcoin address type.
-        
+
         :param address: The alphanumeric Bitcoin address
 
         :return: String representing the address type (P2PKH, P2SH, etc.)
@@ -69,12 +69,12 @@ class BitcoinTestnetExplorer(Explorer):
 
     def __init__(self):
         super().__init__()
-    
+
     @staticmethod
     def get_address_type(address):
         """
         Get the Bitcoin Testnet address type.
-        
+
         :param address: The alphanumeric Bitcoin address
 
         :return: String representing the address type (P2PKH, P2SH, etc.)

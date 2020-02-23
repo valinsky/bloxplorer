@@ -148,7 +148,7 @@ class Addresses(Request):
         """
         Get the Bitcoin address type.
         Not available for Liquid.
-        
+
         :param address: The alphanumeric Bitcoin address
 
         :return: String representing the address type (P2PKH, P2SH, etc.)
