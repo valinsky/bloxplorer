@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>2.1. Explorers &#8212; Bloxplorer  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.2. Addresses" href="addresses.html" />
+    <link rel="prev" title="2. API Documentation" href="../api.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="explorers">
+<span id="id1"></span><h1><span class="section-number">2.1. </span>Explorers<a class="headerlink" href="#explorers" title="Permalink to this headline">¶</a></h1>
+<p>The available explorers are Bitcoin, Bitcoin Testnet and Liquid</p>
+<dl class="class">
+<dt id="bloxplorer.explorer.BitcoinExplorer">
+<em class="property">class </em><code class="sig-prename descclassname">bloxplorer.explorer.</code><code class="sig-name descname">BitcoinExplorer</code><a class="headerlink" href="#bloxplorer.explorer.BitcoinExplorer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="bloxplorer.explorer.BitcoinExplorer.get_address_type">
+<em class="property">static </em><code class="sig-name descname">get_address_type</code><span class="sig-paren">(</span><em class="sig-param">address</em><span class="sig-paren">)</span><a class="headerlink" href="#bloxplorer.explorer.BitcoinExplorer.get_address_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the Bitcoin address type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>address</strong> – The alphanumeric Bitcoin</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>String representing the address type (P2PKH, P2SH, etc.)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bloxplorer.explorer.BitcoinTestnetExplorer">
+<em class="property">class </em><code class="sig-prename descclassname">bloxplorer.explorer.</code><code class="sig-name descname">BitcoinTestnetExplorer</code><a class="headerlink" href="#bloxplorer.explorer.BitcoinTestnetExplorer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="bloxplorer.explorer.BitcoinTestnetExplorer.get_address_type">
+<em class="property">static </em><code class="sig-name descname">get_address_type</code><span class="sig-paren">(</span><em class="sig-param">address</em><span class="sig-paren">)</span><a class="headerlink" href="#bloxplorer.explorer.BitcoinTestnetExplorer.get_address_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the Bitcoin Testnet address type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>address</strong> – The alphanumeric Bitcoin</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>String representing the address type (P2PKH, P2SH, etc.)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bloxplorer.explorer.LiquidExplorer">
+<em class="property">class </em><code class="sig-prename descclassname">bloxplorer.explorer.</code><code class="sig-name descname">LiquidExplorer</code><a class="headerlink" href="#bloxplorer.explorer.LiquidExplorer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Liquid also uses the Issued Assets feature.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bloxplorer</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">1. Quickstart</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">2. API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.1. Explorers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addresses.html">2.2. Addresses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blocks.html">2.3. Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transactions.html">2.4. Transactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mempool.html">2.5. Mempool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fee_estimates.html">2.6. Fee Estimates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="issued_assets.html">2.7. Issued Assets</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../api.html"><span class="section-number">2. </span>API Documentation</a><ul>
+      <li>Previous: <a href="../api.html" title="previous chapter"><span class="section-number">2. </span>API Documentation</a></li>
+      <li>Next: <a href="addresses.html" title="next chapter"><span class="section-number">2.2. </span>Addresses</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Dumitru Valeriu Voicu.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/api/explorers.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

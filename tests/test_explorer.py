@@ -42,3 +42,8 @@ def test_get_address_type_mainnet(address, expected_value):
 )
 def test_get_address_type_testnet(address, expected_value):
     assert bitcoin_testnet_explorer.get_address_type(address) == expected_value
+
+
+def test_get_address_type_liquid():
+    with pytest.raises(AttributeError):
+        assert liquid_explorer.get_address_type('address')
