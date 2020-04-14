@@ -142,7 +142,7 @@ class Addresses(Request):
         :return: :class: `Response` object.
         """
         return self.make_request('GET', f'scripthash/{hash}/utxo', **kwargs)
-    
+
     def get_address_prefix(self, prefix, **kwargs):
         r"""
         Search for addresses beginning with :prefix.
