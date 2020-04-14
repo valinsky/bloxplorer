@@ -1,6 +1,6 @@
 gh-pages:
 	git checkout gh-pages
-	rm -rf _images _sources _static
+	rm -rf _images _sources _static api
 	git checkout master bloxplorer docs README.rst
 	(cd docs && make html)
 	mv -fv docs/_build/html/* ./
