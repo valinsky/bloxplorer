@@ -59,7 +59,7 @@ class Transactions(Request):
     def get_merkleblock_proof(self, tx_id, **kwargs):
         r"""
         Returns a merkle inclusion proof for the transaction using 
-        [bitcoind's merkleblock](https://bitcoin.org/en/glossary/merkle-block) format.
+        `bitcoind's merkleblock <https://bitcoin.org/en/glossary/merkle-block>`_ format.
 
         Note: This endpoint is not currently available for Liquid/Elements-based chains.
 
@@ -73,7 +73,7 @@ class Transactions(Request):
     def get_merkle_proof(self, tx_id, **kwargs):
         r"""
         Returns a merkle inclusion proof for the transaction using 
-        [Electrum's blockchain.transaction.get_merkle](https://electrumx.readthedocs.io/en/latest/protocol-methods.html#blockchain-transaction-get-merkle) format.
+        `Electrum's blockchain.transaction.get_merkle <https://electrumx.readthedocs.io/en/latest/protocol-methods.html#blockchain-transaction-get-merkle>`_ format.
 
         :param tx_id: String representing the transaction hash.
         :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
