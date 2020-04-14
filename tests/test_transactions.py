@@ -21,10 +21,22 @@ def test_get_tx_status():
     transactions.make_request.assert_called_with('GET', f'tx/{tx_id}/status')
 
 
-def test_get_tx_raw_hex():
+def test_get_tx_raw():
     tx_id = '1234'
     transactions.get_raw(tx_id)
+    transactions.make_request.assert_called_with('GET', f'tx/{tx_id}/raw')
+
+
+def test_get_tx_hex():
+    tx_id = '1234'
+    transactions.get_hex(tx_id)
     transactions.make_request.assert_called_with('GET', f'tx/{tx_id}/hex')
+
+
+def test_get_tx_merkleblock_proof():
+    tx_id = '1234'
+    transactions.get_merkleblock_proof(tx_id)
+    transactions.make_request.assert_called_with('GET', f'tx/{tx_id}/merkleblock-proof')
 
 
 def test_get_tx_merkle_proof():

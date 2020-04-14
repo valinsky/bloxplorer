@@ -75,3 +75,9 @@ def test_get_scripthash_utxo():
     hash = '1234'
     addresses.get_scripthash_utxo(hash)
     addresses.make_request.assert_called_with('GET', 'scripthash/1234/utxo')
+
+
+def test_get_address_prefix():
+    prefix = 'pre'
+    addresses.get_address_prefix(prefix)
+    addresses.make_request.assert_called_with('GET', f'address-prefix/{prefix}')

@@ -142,6 +142,18 @@ class Addresses(Request):
         :return: :class: `Response` object.
         """
         return self.make_request('GET', f'scripthash/{hash}/utxo', **kwargs)
+    
+    def get_address_prefix(self, prefix, **kwargs):
+        r"""
+        Search for addresses beginning with :prefix.
+        Returns an array with up to 10 results.
+
+        :param prefix: String representing the prefix the address begins with.
+        :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
+
+        :return: :class: `Response` object.
+        """
+        return self.make_request('GET', f'address-prefix/{prefix}', **kwargs)
 
     @staticmethod
     def get_address_type(address):

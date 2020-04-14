@@ -5,10 +5,10 @@ with open('README.rst', 'r') as f:
 
 setuptools.setup(
     name='bloxplorer',
-    version='0.1.5',
+    version='0.1.6',
     description='Bitcoin and Liquid blockchain explorer',
     long_description=readme,
-    author='Dumitru Valeriu Voicu',
+    author='Vali Voicu',
     author_email='valinsky@protonmail.com',
     url='https://github.com/valinsky/bloxplorer',
     license='MIT',
