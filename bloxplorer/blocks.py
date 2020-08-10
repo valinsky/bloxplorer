@@ -52,7 +52,7 @@ class Blocks(Request):
         """
         path = f'block/{hash}/txs'
         if start_index is not None:
-            path += f'/{start_index}'
+            path = f'{path}/{start_index}'
         return self.make_request('GET', path, **kwargs)
 
     def get_txids(self, hash, index=None, **kwargs):
@@ -92,7 +92,7 @@ class Blocks(Request):
         """
         path = f'blocks'
         if start_height is not None:
-            path += f'/{start_height}'
+            path = f'{path}/{start_height}'
         return self.make_request('GET', path, **kwargs)
 
     def get_last_height(self, **kwargs):

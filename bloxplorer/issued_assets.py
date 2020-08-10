@@ -7,7 +7,7 @@ class IssuedAssets(Request):
     Only for Elements / Liquid.
 
     `Blockstream Esplora Issued Assets API Docs
-    <https://github.com/Blockstream/esplora/blob/master/API.md#issued-assets-elementsliquid-only>`_
+    <https://github.com/Blockstream/esplora/blob/master/API.md#assets-elementsliquid-only>`_
     """
 
     def __init__(self, *args, **kwargs):
@@ -61,5 +61,22 @@ class IssuedAssets(Request):
         """
         path = f'asset/{asset_id}/txs/chain'
         if last_seen:
-            path += f'/{last_seen}'
+            path = f'{path}/{last_seen}'
+        return self.make_request('GET', path, **kwargs)
+
+    def get_supply(self, asset_id, decimal=False, **kwargs):
+        r"""
+        Get the current total supply of the specified asset.
+        Not available for assets with blinded issuances.
+
+        :param asset_id: String representing the issued asset hash.
+        :param decimal: Boolean that returns the supply as decimal if set.
+                        Return in base units if not set (default).
+        :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
+
+        :return: :class: `Response` object.
+        """
+        path = f'asset/{asset_id}/supply'
+        if decimal:
+            path = f'{path}/decimal'
         return self.make_request('GET', path, **kwargs)
