@@ -44,14 +44,9 @@ Links
 * CircleCI: https://circleci.com/gh/valinsky/bloxplorer/tree/master
 * License: https://github.com/valinsky/bloxplorer/blob/master/LICENSE
 
-Tips
-----
+Tip me `+gentleviolet421 <https://paynym.is/+gentleviolet421>`_
 
-You already know :) 
-
-฿itcoin address: **3NRWkeb9HtQn6sGHNyAXhkcoCcUwstpdBb**
-
-Thank you!! 🙏
+For more on paynyms `check this out. <https://paynym.is>`_
 
 .. |circle| image:: https://circleci.com/gh/valinsky/bloxplorer/tree/master.svg?style=shield
     :target: https://circleci.com/gh/valinsky/bloxplorer/tree/master
