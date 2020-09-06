@@ -44,7 +44,7 @@ Links
 * CircleCI: https://circleci.com/gh/valinsky/bloxplorer/tree/master
 * License: https://github.com/valinsky/bloxplorer/blob/master/LICENSE
 
-Tip me: `+gentleviolet421 <https://paynym.is/+gentleviolet421>`_
+Tip me `+gentleviolet421 <https://paynym.is/+gentleviolet421>`_
 
 For more on paynyms `check this out. <https://paynym.is>`_
 
