@@ -51,7 +51,7 @@ For more on paynyms `check this out. <https://paynym.is>`_
 .. |circle| image:: https://circleci.com/gh/valinsky/bloxplorer/tree/master.svg?style=shield
     :target: https://circleci.com/gh/valinsky/bloxplorer/tree/master
 
-.. |version| image:: https://img.shields.io/badge/version-0.1.7-blue
+.. |version| image:: https://img.shields.io/badge/version-0.1.8-blue
     :target: https://pypi.org/project/bloxplorer/
 
 .. |license| image:: https://img.shields.io/badge/license-MIT-orange
