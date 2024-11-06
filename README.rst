@@ -26,7 +26,7 @@ Using the Bloxplorer package is easy and straightforward, as it should be.
     print(response.data)
     '869056'
 
-Full documentation is available at https://valinsky.github.io/bloxplorer/
+Full documentation is available `here <https://valinsky.github.io/bloxplorer/>`_.
 
 Installation
 ------------
@@ -38,11 +38,11 @@ To install the Bloxplorer package just run this command in your favorite termina
 Links
 -----
 
-* Documentation: https://valinsky.github.io/bloxplorer/
-* GitHub: https://github.com/valinsky/bloxplorer
-* Pypi: https://pypi.org/project/bloxplorer
-* CircleCI: https://circleci.com/gh/valinsky/bloxplorer/tree/master
-* License: https://github.com/valinsky/bloxplorer/blob/master/LICENSE
+* `Documentation <https://valinsky.github.io/bloxplorer/>`_
+* `GitHub <https://github.com/valinsky/bloxplorer>`_
+* `Pypi <https://pypi.org/project/bloxplorer>`_
+* `CircleCI <https://circleci.com/gh/valinsky/bloxplorer/tree/master>`_
+* `License <https://github.com/valinsky/bloxplorer/blob/master/LICENSE>`_
 
 
 .. |CI| image:: https://github.com/valinsky/bloxplorer/actions/workflows/main.yml/badge.svg
