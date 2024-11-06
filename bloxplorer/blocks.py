@@ -90,7 +90,7 @@ class Blocks(Request):
 
         :return: :class: `Response` object.
         """
-        path = f'blocks'
+        path = 'blocks'
         if start_height is not None:
             path = f'{path}/{start_height}'
         return self.make_request('GET', path, **kwargs)
