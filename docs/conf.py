@@ -19,8 +19,8 @@ sys.path.insert(0, os.path.abspath('..'))
 # -- Project information -----------------------------------------------------
 
 project = 'Bloxplorer'
-copyright = '2019, Dumitru Valeriu Voicu'
-author = 'Dumitru Valeriu Voicu'
+copyright = '2025, Vali Voicu'
+author = 'Vali Voicu'
 
 # The full version, including alpha/beta/rc tags
 release = ''

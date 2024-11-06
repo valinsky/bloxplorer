@@ -1,3 +1,4 @@
+from bloxplorer.constants import http
 from bloxplorer.utils import Request
 
 
@@ -21,7 +22,7 @@ class Addresses(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'address/{address}', **kwargs)
+        return self.make_request(http.GET, f'address/{address}', **kwargs)
 
     def get_scripthash(self, hash, **kwargs):
         r"""
@@ -32,7 +33,7 @@ class Addresses(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'scripthash/{hash}', **kwargs)
+        return self.make_request(http.GET, f'scripthash/{hash}', **kwargs)
 
     def get_tx_history(self, address, **kwargs):
         r"""
@@ -46,7 +47,7 @@ class Addresses(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'address/{address}/txs', **kwargs)
+        return self.make_request(http.GET, f'address/{address}/txs', **kwargs)
 
     def get_scripthash_tx_history(self, hash, **kwargs):
         r"""
@@ -60,7 +61,7 @@ class Addresses(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'scripthash/{hash}/txs', **kwargs)
+        return self.make_request(http.GET, f'scripthash/{hash}/txs', **kwargs)
 
     def get_confirmed_tx_history(self, address, last_seen_txid=None, **kwargs):
         r"""
@@ -77,7 +78,7 @@ class Addresses(Request):
         path = f'address/{address}/txs/chain'
         if last_seen_txid is not None:
             path += f'/{last_seen_txid}'
-        return self.make_request('GET', path, **kwargs)
+        return self.make_request(http.GET, path, **kwargs)
 
     def get_confirmed_scripthash_tx_history(self, hash, last_seen_txid=None, **kwargs):
         r"""
@@ -95,7 +96,7 @@ class Addresses(Request):
         path = f'scripthash/{hash}/txs/chain'
         if last_seen_txid is not None:
             path += f'/{last_seen_txid}'
-        return self.make_request('GET', path, **kwargs)
+        return self.make_request(http.GET, path, **kwargs)
 
     def get_unconfirmed_tx_history(self, address, **kwargs):
         r"""
@@ -107,7 +108,7 @@ class Addresses(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'address/{address}/txs/mempool', **kwargs)
+        return self.make_request(http.GET, f'address/{address}/txs/mempool', **kwargs)
 
     def get_unconfirmed_scripthash_tx_history(self, hash, **kwargs):
         r"""
@@ -119,7 +120,7 @@ class Addresses(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'scripthash/{hash}/txs/mempool', **kwargs)
+        return self.make_request(http.GET, f'scripthash/{hash}/txs/mempool', **kwargs)
 
     def get_utxo(self, address, **kwargs):
         r"""
@@ -130,7 +131,7 @@ class Addresses(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'address/{address}/utxo', **kwargs)
+        return self.make_request(http.GET, f'address/{address}/utxo', **kwargs)
 
     def get_scripthash_utxo(self, hash, **kwargs):
         r"""
@@ -141,7 +142,7 @@ class Addresses(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'scripthash/{hash}/utxo', **kwargs)
+        return self.make_request(http.GET, f'scripthash/{hash}/utxo', **kwargs)
 
     def get_address_prefix(self, prefix, **kwargs):
         r"""
@@ -153,7 +154,7 @@ class Addresses(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'address-prefix/{prefix}', **kwargs)
+        return self.make_request(http.GET, f'address-prefix/{prefix}', **kwargs)
 
     @staticmethod
     def get_address_type(address):

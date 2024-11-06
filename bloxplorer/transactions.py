@@ -1,3 +1,4 @@
+from bloxplorer.constants import http
 from bloxplorer.utils import Request
 
 
@@ -21,7 +22,7 @@ class Transactions(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'tx/{tx_id}', **kwargs)
+        return self.make_request(http.GET, f'tx/{tx_id}', **kwargs)
 
     def get_status(self, tx_id, **kwargs):
         r"""
@@ -32,7 +33,7 @@ class Transactions(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'tx/{tx_id}/status', **kwargs)
+        return self.make_request(http.GET, f'tx/{tx_id}/status', **kwargs)
 
     def get_raw(self, tx_id, **kwargs):
         r"""
@@ -43,7 +44,7 @@ class Transactions(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'tx/{tx_id}/raw', **kwargs)
+        return self.make_request(http.GET, f'tx/{tx_id}/raw', **kwargs)
 
     def get_hex(self, tx_id, **kwargs):
         r"""
@@ -54,7 +55,7 @@ class Transactions(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'tx/{tx_id}/hex', **kwargs)
+        return self.make_request(http.GET, f'tx/{tx_id}/hex', **kwargs)
 
     def get_merkleblock_proof(self, tx_id, **kwargs):
         r"""
@@ -68,7 +69,7 @@ class Transactions(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'tx/{tx_id}/merkleblock-proof', **kwargs)
+        return self.make_request(http.GET, f'tx/{tx_id}/merkleblock-proof', **kwargs)
 
     def get_merkle_proof(self, tx_id, **kwargs):
         r"""
@@ -80,7 +81,7 @@ class Transactions(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'tx/{tx_id}/merkle-proof', **kwargs)
+        return self.make_request(http.GET, f'tx/{tx_id}/merkle-proof', **kwargs)
 
     def get_spending_status(self, tx_id, vout=None, **kwargs):
         r"""
@@ -94,7 +95,7 @@ class Transactions(Request):
         :return: :class: `Response` object.
         """
         path = f'tx/{tx_id}/outspend/{vout}' if vout is not None else f'tx/{tx_id}/outspends'
-        return self.make_request('GET', path, **kwargs)
+        return self.make_request(http.GET, path, **kwargs)
 
     def post(self, hex_tx, **kwargs):
         r"""
@@ -107,4 +108,4 @@ class Transactions(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('POST', 'tx', data=hex_tx, **kwargs)
+        return self.make_request(http.POST, 'tx', data=hex_tx, **kwargs)

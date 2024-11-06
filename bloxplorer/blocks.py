@@ -1,3 +1,4 @@
+from bloxplorer.constants import http
 from bloxplorer.utils import Request
 
 
@@ -23,7 +24,7 @@ class Blocks(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'block/{hash}', **kwargs)
+        return self.make_request(http.GET, f'block/{hash}', **kwargs)
 
     def get_status(self, hash, **kwargs):
         r"""
@@ -35,7 +36,7 @@ class Blocks(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'block/{hash}/status', **kwargs)
+        return self.make_request(http.GET, f'block/{hash}/status', **kwargs)
 
     def get_txs(self, hash, start_index=None, **kwargs):
         r"""
@@ -53,7 +54,7 @@ class Blocks(Request):
         path = f'block/{hash}/txs'
         if start_index is not None:
             path = f'{path}/{start_index}'
-        return self.make_request('GET', path, **kwargs)
+        return self.make_request(http.GET, path, **kwargs)
 
     def get_txids(self, hash, index=None, **kwargs):
         r"""
@@ -68,7 +69,7 @@ class Blocks(Request):
         :return: :class: `Response` object.
         """
         path = f'block/{hash}/txid/{index}' if index is not None else f'block/{hash}/txids'
-        return self.make_request('GET', path, **kwargs)
+        return self.make_request(http.GET, path, **kwargs)
 
     def get_height(self, height, **kwargs):
         r"""
@@ -79,7 +80,7 @@ class Blocks(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'block-height/{height}', **kwargs)
+        return self.make_request(http.GET, f'block-height/{height}', **kwargs)
 
     def get_blocks(self, start_height=None, **kwargs):
         r"""
@@ -90,10 +91,10 @@ class Blocks(Request):
 
         :return: :class: `Response` object.
         """
-        path = f'blocks'
+        path = 'blocks'
         if start_height is not None:
             path = f'{path}/{start_height}'
-        return self.make_request('GET', path, **kwargs)
+        return self.make_request(http.GET, path, **kwargs)
 
     def get_last_height(self, **kwargs):
         r"""
@@ -103,7 +104,7 @@ class Blocks(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', 'blocks/tip/height', **kwargs)
+        return self.make_request(http.GET, 'blocks/tip/height', **kwargs)
 
     def get_last_hash(self, **kwargs):
         r"""
@@ -113,4 +114,4 @@ class Blocks(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', 'blocks/tip/hash', **kwargs)
+        return self.make_request(http.GET, 'blocks/tip/hash', **kwargs)

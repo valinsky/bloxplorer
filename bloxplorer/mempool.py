@@ -1,3 +1,4 @@
+from bloxplorer.constants import http
 from bloxplorer.utils import Request
 
 
@@ -20,7 +21,7 @@ class Mempool(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', 'mempool', **kwargs)
+        return self.make_request(http.GET, 'mempool', **kwargs)
 
     def get_txids(self, **kwargs):
         r"""
@@ -31,7 +32,7 @@ class Mempool(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', 'mempool/txids', **kwargs)
+        return self.make_request(http.GET, 'mempool/txids', **kwargs)
 
     def get_latest_txs(self, **kwargs):
         r"""
@@ -41,4 +42,4 @@ class Mempool(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', 'mempool/recent', **kwargs)
+        return self.make_request(http.GET, 'mempool/recent', **kwargs)

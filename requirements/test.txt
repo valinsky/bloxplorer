@@ -1,7 +1,7 @@
 -r dev.txt
 
-flake8==3.7.8
-pytest==5.1.0
-pytest-cov==2.7.1
-pytest-mock==1.10.4
-isort==4.3.21
+flake8==7.1.1
+pytest==8.3.3
+pytest-cov==6.0.0
+pytest-mock==3.14.0
+isort==5.13.2
