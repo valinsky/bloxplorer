@@ -1,3 +1,4 @@
+from bloxplorer.constants import http
 from bloxplorer.utils import Request
 
 
@@ -22,4 +23,4 @@ class Fees(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', 'fee-estimates', **kwargs)
+        return self.make_request(http.GET, 'fee-estimates', **kwargs)

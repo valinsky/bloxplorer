@@ -1,3 +1,4 @@
+from bloxplorer.constants import http
 from bloxplorer.utils import Request
 
 
@@ -22,7 +23,7 @@ class IssuedAssets(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'asset/{asset_id}', **kwargs)
+        return self.make_request(http.GET, f'asset/{asset_id}', **kwargs)
 
     def get_txs(self, asset_id, **kwargs):
         r"""
@@ -34,7 +35,7 @@ class IssuedAssets(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'asset/{asset_id}/txs', **kwargs)
+        return self.make_request(http.GET, f'asset/{asset_id}/txs', **kwargs)
 
     def get_mempool(self, asset_id, **kwargs):
         r"""
@@ -46,7 +47,7 @@ class IssuedAssets(Request):
 
         :return: :class: `Response` object.
         """
-        return self.make_request('GET', f'asset/{asset_id}/txs/mempool', **kwargs)
+        return self.make_request(http.GET, f'asset/{asset_id}/txs/mempool', **kwargs)
 
     def get_chain(self, asset_id, last_seen=None, **kwargs):
         r"""
@@ -62,7 +63,7 @@ class IssuedAssets(Request):
         path = f'asset/{asset_id}/txs/chain'
         if last_seen:
             path = f'{path}/{last_seen}'
-        return self.make_request('GET', path, **kwargs)
+        return self.make_request(http.GET, path, **kwargs)
 
     def get_supply(self, asset_id, decimal=False, **kwargs):
         r"""
@@ -79,4 +80,4 @@ class IssuedAssets(Request):
         path = f'asset/{asset_id}/supply'
         if decimal:
             path = f'{path}/decimal'
-        return self.make_request('GET', path, **kwargs)
+        return self.make_request(http.GET, path, **kwargs)

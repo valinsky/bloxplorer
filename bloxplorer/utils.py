@@ -2,7 +2,10 @@ from urllib.parse import urljoin
 
 import requests
 
-from bloxplorer.constants import CONTENT_TYPE_JSON, CONTENT_TYPE_TEXT, DEFAULT_TIMEOUT
+from bloxplorer.constants import (
+    CONTENT_TYPE_JSON, CONTENT_TYPE_TEXT, DEFAULT_TIMEOUT, INVALID_API_RESOURCE_MESSAGE,
+    NETWORK_ERROR_MESSAGE, REQUEST_TIMED_OUT_MESSAGE, UNKNOWN_ERROR_MESSAGE
+)
 from bloxplorer.exceptions import (
     BlockstreamApiError, BlockstreamClientError, BlockstreamClientNetworkError,
     BlockstreamClientTimeout
@@ -13,6 +16,9 @@ class Request:
     """
     Parent class used to send requests to, and handle responses from, the Blockstream Esplora API.
     """
+
+    __slots__ = ('base_url', )
+
     def __init__(self, base_url):
         self.base_url = base_url
 
@@ -45,14 +51,14 @@ class Request:
 
         except requests.exceptions.Timeout:
             raise BlockstreamClientTimeout(
-                message='Request timed out.', resource_url=url, request_method=method)
+                message=REQUEST_TIMED_OUT_MESSAGE, resource_url=url, request_method=method)
 
         except requests.exceptions.ConnectionError:
             raise BlockstreamClientNetworkError(
-                message='Network error.', resource_url=url, request_method=method)
+                message=NETWORK_ERROR_MESSAGE, resource_url=url, request_method=method)
 
         except requests.exceptions.RequestException as e:
-            raise BlockstreamClientError(message=str(e), resource_url=url, request_method=method)
+            raise BlockstreamClientError(message=f'{e}', resource_url=url, request_method=method)
 
         return self._handle_response(response)
 
@@ -94,11 +100,11 @@ class Request:
 
         if response.status_code == requests.codes.not_found:
             raise BlockstreamApiError(
-                message='Invalid API resource.', resource_url=response.url, request_method=method,
+                message=INVALID_API_RESOURCE_MESSAGE, resource_url=response.url, request_method=method,
                 status_code=response.status_code)
 
         raise BlockstreamApiError(
-            message='An unknown error occured while processing your request.',
+            message=UNKNOWN_ERROR_MESSAGE,
             resource_url=response.url, request_method=method, status_code=response.status_code)
 
 
@@ -107,7 +113,7 @@ class Response:
     Class used to create the `Response` object returned after an API call.
     """
 
-    __slots__ = ['resource_url', 'headers', 'method', 'data']
+    __slots__ = ('resource_url', 'headers', 'method', 'data', )
 
     def __init__(self, response, data):
         self.resource_url = response.url

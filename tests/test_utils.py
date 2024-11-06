@@ -6,7 +6,7 @@ from urllib.parse import urljoin
 import pytest
 import requests
 
-from bloxplorer.constants import CONTENT_TYPE_JSON, CONTENT_TYPE_TEXT, DEFAULT_TIMEOUT
+from bloxplorer.constants import CONTENT_TYPE_JSON, CONTENT_TYPE_TEXT, DEFAULT_TIMEOUT, http
 from bloxplorer.exceptions import (
     BlockstreamApiError, BlockstreamClientError, BlockstreamClientNetworkError,
     BlockstreamClientTimeout
@@ -31,7 +31,7 @@ class MockResponse:
 
 
 def test__request(mocker):
-    method = 'GET'
+    method = http.GET
     url = 'www.thecakeisalie.com/api/42'
     mock_request = mocker.patch('bloxplorer.utils.requests.request')
     mock_response = MagicMock()
@@ -46,7 +46,7 @@ def test__request(mocker):
 
 
 def test__request_parameters(mocker):
-    method = 'GET'
+    method = http.GET
     url = 'www.thecakeisalie.com/api/42'
     timeout = 10
     headers = {
@@ -81,7 +81,7 @@ def test__request_raises(mocker, exception, raised_exception):
     request = Request('www.thecakeisalie.com/api')
 
     with pytest.raises(raised_exception):
-        request._request('GET', url)
+        request._request(http.GET, url)
 
 
 def test__prepare_resource_url():
@@ -95,7 +95,7 @@ def test__prepare_resource_url():
 
 
 def test_make_request(mocker):
-    method = 'GET'
+    method = http.GET
     base_url = 'www.thecakeisalie.com/api/'
     path = 'answer/is/42'
     url = urljoin(base_url, path)
@@ -112,7 +112,7 @@ def test__handle_response_json(mocker):
     url = 'www.thecakeisalie.com/api/answer/is/42'
     headers = {'content-type': CONTENT_TYPE_JSON}
     data = '{"block": "1234"}'
-    method = 'GET'
+    method = http.GET
     response = MockResponse(
         data=data, headers=headers, status_code=requests.codes.ok, url=url, method=method
     )
@@ -130,7 +130,7 @@ def test__handle_response_text(mocker):
     url = 'www.thecakeisalie.com/api/answer/is/42'
     headers = {'content-type': CONTENT_TYPE_TEXT}
     data = '1234'
-    method = 'GET'
+    method = http.GET
     response = MockResponse(
         data=data, headers=headers, status_code=requests.codes.ok, url=url, method=method
     )
@@ -155,7 +155,7 @@ def test__handle_response_raises(mocker, status_code, exception):
     url = 'www.thecakeisalie.com/api/answer/is/42'
     headers = {'content-type': CONTENT_TYPE_TEXT}
     data = None
-    method = 'GET'
+    method = http.GET
     response = MockResponse(
         data=data, headers=headers, status_code=status_code, url=url, method=method
     )
