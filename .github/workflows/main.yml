@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - feature/maintenance
   pull_request:
     branches:
       - master
