@@ -6,7 +6,7 @@
 Bitcoin and Liquid Blockchain Explorer
 ======================================
 
-|circle| |version| |license| |downloads|
+|CI| |version| |license| |downloads|
 
 **Bloxplorer** is a simple yet very effective Bitcoin and Liquid blockchain explorer.
 
