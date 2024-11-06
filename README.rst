@@ -24,7 +24,7 @@ Using the Bloxplorer package is easy and straightforward, as it should be.
 
     response = bitcoin_explorer.blocks.get_last_height()
     print(response.data)
-    '586438'
+    '869056'
 
 Full documentation is available at https://valinsky.github.io/bloxplorer/
 
