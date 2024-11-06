@@ -41,7 +41,7 @@ Links
 * `Documentation <https://valinsky.github.io/bloxplorer/>`_
 * `GitHub <https://github.com/valinsky/bloxplorer>`_
 * `Pypi <https://pypi.org/project/bloxplorer>`_
-* `CircleCI <https://circleci.com/gh/valinsky/bloxplorer/tree/master>`_
+* `CI <https://github.com/valinsky/bloxplorer/actions/>`_
 * `License <https://github.com/valinsky/bloxplorer/blob/master/LICENSE>`_
 
 
