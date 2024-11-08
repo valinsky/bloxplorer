@@ -54,5 +54,5 @@ Links
 .. |license| image:: https://img.shields.io/badge/license-MIT-orange
     :target:  https://github.com/valinsky/bloxplorer/blob/master/LICENSE
 
-.. |downloads| image:: https://pepy.tech/badge/bloxplorer
+.. |downloads| image:: https://static.pepy.tech/badge/bloxplorer
     :target: https://pepy.tech/project/bloxplorer/
