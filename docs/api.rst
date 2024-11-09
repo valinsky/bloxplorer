@@ -15,6 +15,7 @@ multiple endpoints and methods associated with the following resources:
 Bloxplorer is a Python wrapper around these resources and methods.
 
 The explorers are instantiated with the following base urls:
+
 * Bitcoin Explorer: https://blockstream.info/api/
 * Liquid Explorer: https://blockstream.info/liquid/api/
 * Bitcoin Testnet Explorer: https://blockstream.info/testnet/api/
