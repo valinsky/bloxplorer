@@ -42,7 +42,7 @@ Links
 * `GitHub <https://github.com/valinsky/bloxplorer>`_
 * `Pypi <https://pypi.org/project/bloxplorer>`_
 * `CI <https://github.com/valinsky/bloxplorer/actions/>`_
-* `License <https://github.com/valinsky/bloxplorer/blob/master/LICENSE>`_
+* `License <https://github.com/valinsky/bloxplorer/blob/main/LICENSE>`_
 
 
 .. |CI| image:: https://github.com/valinsky/bloxplorer/actions/workflows/main.yml/badge.svg
@@ -52,7 +52,7 @@ Links
     :target: https://pypi.org/project/bloxplorer/
 
 .. |license| image:: https://img.shields.io/badge/license-MIT-orange
-    :target:  https://github.com/valinsky/bloxplorer/blob/master/LICENSE
+    :target:  https://github.com/valinsky/bloxplorer/blob/main/LICENSE
 
 .. |downloads| image:: https://static.pepy.tech/badge/bloxplorer
     :target: https://pepy.tech/project/bloxplorer/
