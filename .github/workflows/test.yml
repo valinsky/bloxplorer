@@ -1,4 +1,4 @@
-name: Run unit tests and static analysis
+name: CI
 
 on:
   push:

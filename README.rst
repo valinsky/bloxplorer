@@ -45,7 +45,7 @@ Links
 * `License <https://github.com/valinsky/bloxplorer/blob/main/LICENSE>`_
 
 
-.. |CI| image:: https://github.com/valinsky/bloxplorer/actions/workflows/main.yml/badge.svg
+.. |CI| image:: https://github.com/valinsky/bloxplorer/actions/workflows/test.yml/badge.svg
     :target: https://github.com/valinsky/bloxplorer/actions/
 
 .. |version| image:: https://img.shields.io/badge/version-0.1.10-blue
