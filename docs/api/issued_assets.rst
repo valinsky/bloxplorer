@@ -3,7 +3,7 @@
 Issued Assets
 =============
 
-The Issued Assets class is available only for the Elements / Liquid explorer.
+The Issued Assets class is available only for the Liquid explorer.
 
 Usage
 *****

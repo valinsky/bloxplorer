@@ -8,15 +8,16 @@ Using the Bloxplorer package is easy and straightforward, as it should be.
 Setup
 *****
 
-To install the Bloxplorer package just run this command in your favorite terminal:
+To install the Bloxplorer package simply run this command in your favorite terminal:
 
     >>> pip install bloxplorer
 
 Usage
 *****
 
-After installation you may import and use the desired explorer and all 
-of its associated methods. The available explorers are Bitcoin, Liquid and Bitcoin Testnet:
+After installation, you can import and use the desired explorer and its methods. 
+For a full list of available methods :ref:`click here <api>`. 
+The available explorers are Bitcoin, Liquid and Bitcoin Testnet:
 
 Bitcoin Explorer
 ----------------
@@ -51,8 +52,6 @@ Bitcoin Testnet Explorer
     print(result.data)
     '1571699'
 
-For a full list of available API methods :ref:`click here <api>`.
-
 Timeouts
 ********
 
@@ -65,7 +64,7 @@ By default the timeout is set to 5 seconds.
 Exceptions
 **********
 
-There are 2 different types of exceptions that can be raised, client and API exceptions.
+There are 2 different types of exceptions that can be raised, Client and API exceptions.
 
 **Client Exceptions**
 
@@ -74,21 +73,21 @@ BlockstreamClientNetworkError will be raised.
 
 In the event of a Timeout, BlockstreamClientTimeout will be raised.
 
-For anything else, Bloxplorer will raise a BlockstreamClientError.
+For anything else, BlockstreamClientError will be raised.
 
-These exceptions will be accompanied by the error message, the resource url and the http method.
+These exceptions will contain the error message, the resource url and the http method.
 
 **API Exceptions**
 
 In the event of an API error (e.g. Invalid resource, Bad Request, etc), Bloxplorer will
 raise BlockstreamApiError.
 
-This exception will provide the same data as the Client exceptions, alongside the status code.
+This exception will contain the same data as the Client exceptions, alongside the status code.
 
 Source Code
 ***********
 
-Bloxplorer is available on GitHub -> `right here <https://github.com/valinsky/bloxplorer>`_.
+Bloxplorer is `available on GitHub <https://github.com/valinsky/bloxplorer>`_.
 
 Clone the public repository:
 
@@ -98,4 +97,4 @@ Dependencies
 ************
 
 Bloxplorer uses the beautiful `Requests <https://github.com/requests/requests>`_ package for 
-its HTTP calls. Big shout out to the `Requests <https://github.com/requests/requests>`_ team.
+its HTTP calls.
