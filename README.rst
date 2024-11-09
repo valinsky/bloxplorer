@@ -1,6 +1,6 @@
-*************************
+***********************
 🔥🔥🔥 Bloxplorer 🔥🔥🔥 
-*************************
+***********************
 
 ======================================
 Bitcoin and Liquid Blockchain Explorer
@@ -8,7 +8,7 @@ Bitcoin and Liquid Blockchain Explorer
 
 |CI| |version| |license| |downloads|
 
-**Bloxplorer** is a simple yet very effective Bitcoin and Liquid blockchain explorer.
+**Bloxplorer** is a simple and effective Bitcoin blockchain explorer.
 
 It allows developers to make use of the full power of the `Blockstream Esplora HTTP API 
 <https://github.com/Blockstream/esplora/blob/master/API.md>`_ through a clean Python interface.
@@ -31,7 +31,7 @@ Full documentation is available `here <https://valinsky.github.io/bloxplorer/>`_
 Installation
 ------------
 
-To install the Bloxplorer package just run this command in your favorite terminal:
+To install the Bloxplorer package simply run this command in your favorite terminal:
 
 >>> pip install bloxplorer
 
