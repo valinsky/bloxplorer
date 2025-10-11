@@ -18,7 +18,7 @@ Usage
     """
     {
         'address': 'mwog86wxZsWf6KGufzwA69xbvzE9TGZ5vA',
-        'chain_stats': 
+        'chain_stats':
         {
             'funded_txo_count': 1,
             'funded_txo_sum': 4809083,
@@ -26,7 +26,7 @@ Usage
             'spent_txo_sum': 0,
             'tx_count': 1
         },
-        'mempool_stats': 
+        'mempool_stats':
         {
             'funded_txo_count': 0,
             'funded_txo_sum': 0,

@@ -15,8 +15,8 @@ To install the Bloxplorer package simply run this command in your favorite termi
 Usage
 *****
 
-After installation, you can import and use the desired explorer and its methods. 
-For a full list of available methods :ref:`click here <api>`. 
+After installation, you can import and use the desired explorer and its methods.
+For a full list of available methods :ref:`click here <api>`.
 The available explorers are Bitcoin, Liquid and Bitcoin Testnet:
 
 Bitcoin Explorer
@@ -30,17 +30,6 @@ Bitcoin Explorer
     print(result.data)
     '587840'
 
-Liquid Explorer
----------------
-
-.. code-block:: python
-
-    from bloxplorer import liquid_explorer
-
-    result = liquid_explorer.blocks.get_last_height()
-    print(result.data)
-    '412287'
-
 Bitcoin Testnet Explorer
 ------------------------
 
@@ -52,11 +41,33 @@ Bitcoin Testnet Explorer
     print(result.data)
     '1571699'
 
+Bitcoin Signet Explorer
+------------------------
+
+.. code-block:: python
+
+    from bloxplorer import bitcoin_signet_explorer
+
+    result = bitcoin_signet_explorer.blocks.get_last_height()
+    print(result.data)
+    '273464'
+
+Liquid Explorer
+---------------
+
+.. code-block:: python
+
+    from bloxplorer import liquid_explorer
+
+    result = liquid_explorer.blocks.get_last_height()
+    print(result.data)
+    '412287'
+
 Timeouts
 ********
 
-You can tell Bloxplorer to stop waiting for a response from the Blockstream API after 
-a given number of seconds with the **timeout** parameter. 
+You can tell Bloxplorer to stop waiting for a response from the Blockstream API after
+a given number of seconds with the **timeout** parameter.
 By default the timeout is set to 5 seconds.
 
     >>> bitcoin_explorer.blocks.get_blocks(start_height='587840', timeout=3)
@@ -68,7 +79,7 @@ There are 2 different types of exceptions that can be raised, Client and API exc
 
 **Client Exceptions**
 
-In the event of a network problem (e.g. DNS failure, refused connection, etc), 
+In the event of a network problem (e.g. DNS failure, refused connection, etc),
 BlockstreamClientNetworkError will be raised.
 
 In the event of a Timeout, BlockstreamClientTimeout will be raised.
@@ -96,5 +107,5 @@ Clone the public repository:
 Dependencies
 ************
 
-Bloxplorer uses the beautiful `Requests <https://github.com/requests/requests>`_ package for 
+Bloxplorer uses the beautiful `Requests <https://github.com/requests/requests>`_ package for
 its HTTP calls.
