@@ -2,7 +2,7 @@ from bloxplorer.addresses import Addresses
 from bloxplorer.blocks import Blocks
 from bloxplorer.constants import (
     BECH32, BIP32_PRVKEY, BIP32_PUBKEY, BITCOIN_API_BASE_URL, BITCOIN_TESTNET_API_BASE_URL,
-    LIQUID_API_BASE_URL, P2PKH, P2SH, UNRECOGNIZED_ADDRESS_TYPE
+    BITCOIN_SIGNET_API_BASE_URL, LIQUID_API_BASE_URL, P2PKH, P2SH, UNRECOGNIZED_ADDRESS_TYPE
 )
 from bloxplorer.fees import Fees
 from bloxplorer.issued_assets import IssuedAssets
@@ -34,9 +34,6 @@ class BitcoinExplorer(Explorer):
 
     BASE_URL = BITCOIN_API_BASE_URL
 
-    def __init__(self):
-        super().__init__()
-
     @staticmethod
     def get_address_type(address):
         """
@@ -67,9 +64,6 @@ class BitcoinTestnetExplorer(Explorer):
 
     BASE_URL = BITCOIN_TESTNET_API_BASE_URL
 
-    def __init__(self):
-        super().__init__()
-
     @staticmethod
     def get_address_type(address):
         """
@@ -94,6 +88,11 @@ class BitcoinTestnetExplorer(Explorer):
             return BIP32_PRVKEY
 
         return UNRECOGNIZED_ADDRESS_TYPE
+
+
+class BitcoinSignetExplorer(Explorer):
+
+    BASE_URL = BITCOIN_SIGNET_API_BASE_URL
 
 
 class LiquidExplorer(Explorer):
