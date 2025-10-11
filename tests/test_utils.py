@@ -4,7 +4,7 @@ from unittest.mock import MagicMock
 from urllib.parse import urljoin
 
 import pytest
-import requests
+import httpx
 
 from bloxplorer.constants import CONTENT_TYPE_JSON, CONTENT_TYPE_TEXT, DEFAULT_TIMEOUT, http
 from bloxplorer.exceptions import (
@@ -12,6 +12,9 @@ from bloxplorer.exceptions import (
     BlockstreamClientTimeout
 )
 from bloxplorer.utils import Request
+
+
+BASE_URL_TEST = 'http://thecakeisalie.com/api/'
 
 
 class MockResponse:
@@ -32,13 +35,13 @@ class MockResponse:
 
 def test__request(mocker):
     method = http.GET
-    url = 'www.thecakeisalie.com/api/42'
-    mock_request = mocker.patch('bloxplorer.utils.requests.request')
+    url = f'{BASE_URL_TEST}/42'
+    mock_request = mocker.patch('bloxplorer.utils.httpx.Client.request')
     mock_response = MagicMock()
     mock_request.return_value = mock_response
     mock_handle_response = mocker.patch('bloxplorer.utils.Request._handle_response')
 
-    request = Request('www.thecakeisalie.com/api')
+    request = Request(BASE_URL_TEST)
     request._request(method, url)
 
     mock_request.assert_called_with(method, url, timeout=DEFAULT_TIMEOUT)
@@ -47,19 +50,19 @@ def test__request(mocker):
 
 def test__request_parameters(mocker):
     method = http.GET
-    url = 'www.thecakeisalie.com/api/42'
+    url = f'{BASE_URL_TEST}/42'
     timeout = 10
     headers = {
         'blah': 'blah'
     }
     kwargzilla = 'yeet'
 
-    mock_request = mocker.patch('bloxplorer.utils.requests.request')
+    mock_request = mocker.patch('bloxplorer.utils.httpx.Client.request')
     mock_response = MagicMock()
     mock_request.return_value = mock_response
     mock_handle_response = mocker.patch('bloxplorer.utils.Request._handle_response')
 
-    request = Request('www.thecakeisalie.com/api')
+    request = Request(BASE_URL_TEST)
     request._request(method, url, timeout=timeout, headers=headers, kwargzilla=kwargzilla)
 
     mock_request.assert_called_with(method, url, timeout=timeout, headers=headers, kwargzilla=kwargzilla)
@@ -68,53 +71,51 @@ def test__request_parameters(mocker):
 
 @pytest.mark.parametrize(
     'exception, raised_exception', (
-        (requests.exceptions.Timeout, BlockstreamClientTimeout),
-        (requests.exceptions.ConnectionError, BlockstreamClientNetworkError),
-        (requests.exceptions.RequestException, BlockstreamClientError),
+        (httpx.TimeoutException('Test timeout error'), BlockstreamClientTimeout),
+        (httpx.NetworkError('Test network error'), BlockstreamClientNetworkError),
+        (httpx.RequestError('Test request error'), BlockstreamClientError),
     )
 )
 def test__request_raises(mocker, exception, raised_exception):
-    url = 'www.thecakeisalie.com/api/42'
-    mock_request = mocker.patch('bloxplorer.utils.requests.request')
+    url = f'{BASE_URL_TEST}/42'
+    mock_request = mocker.patch('bloxplorer.utils.httpx.Client.request')
     mock_request.side_effect = exception
 
-    request = Request('www.thecakeisalie.com/api')
+    request = Request(BASE_URL_TEST)
 
     with pytest.raises(raised_exception):
         request._request(http.GET, url)
 
 
 def test__prepare_resource_url():
-    base_url = 'www.thecakeisalie.com/api/'
     path = 'answer/is/42'
-    expected = 'www.thecakeisalie.com/api/answer/is/42'
+    expected = f'{BASE_URL_TEST}answer/is/42'
 
-    request = Request(base_url)
+    request = Request(BASE_URL_TEST)
 
     assert request._prepare_resource_url(path) == expected
 
 
 def test_make_request(mocker):
     method = http.GET
-    base_url = 'www.thecakeisalie.com/api/'
     path = 'answer/is/42'
-    url = urljoin(base_url, path)
+    url = urljoin(BASE_URL_TEST, path)
     kwargs = {'nitty': 'gritty'}
     mock__request = mocker.patch('bloxplorer.utils.Request._request')
 
-    request = Request(base_url)
+    request = Request(BASE_URL_TEST)
     request.make_request(method, path, **kwargs)
 
     mock__request.assert_called_with(method, url, **kwargs)
 
 
 def test__handle_response_json(mocker):
-    url = 'www.thecakeisalie.com/api/answer/is/42'
+    url = f'{BASE_URL_TEST}is/42'
     headers = {'content-type': CONTENT_TYPE_JSON}
     data = '{"block": "1234"}'
     method = http.GET
     response = MockResponse(
-        data=data, headers=headers, status_code=requests.codes.ok, url=url, method=method
+        data=data, headers=headers, status_code=httpx.codes.ok, url=url, method=method
     )
 
     response = Request._handle_response(response)
@@ -127,12 +128,12 @@ def test__handle_response_json(mocker):
 
 
 def test__handle_response_text(mocker):
-    url = 'www.thecakeisalie.com/api/answer/is/42'
+    url = f'{BASE_URL_TEST}answer/is/42'
     headers = {'content-type': CONTENT_TYPE_TEXT}
     data = '1234'
     method = http.GET
     response = MockResponse(
-        data=data, headers=headers, status_code=requests.codes.ok, url=url, method=method
+        data=data, headers=headers, status_code=httpx.codes.ok, url=url, method=method
     )
 
     response = Request._handle_response(response)
@@ -146,13 +147,13 @@ def test__handle_response_text(mocker):
 
 @pytest.mark.parametrize(
     'status_code, exception', (
-        (requests.codes.bad_request, BlockstreamApiError),
-        (requests.codes.not_found, BlockstreamApiError),
-        (requests.codes.im_a_teapot, BlockstreamApiError),
+        (httpx.codes.bad_request, BlockstreamApiError),
+        (httpx.codes.not_found, BlockstreamApiError),
+        (httpx.codes.im_a_teapot, BlockstreamApiError),
     )
 )
 def test__handle_response_raises(mocker, status_code, exception):
-    url = 'www.thecakeisalie.com/api/answer/is/42'
+    url = f'{BASE_URL_TEST}answer/is/42'
     headers = {'content-type': CONTENT_TYPE_TEXT}
     data = None
     method = http.GET

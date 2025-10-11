@@ -14,7 +14,7 @@ setuptools.setup(
     license='MIT',
     packages=['bloxplorer'],
     include_package_data=True,
-    install_requires=['requests'],
+    install_requires=['httpx'],
     test_suite='tests',
     tests_require=['pytest'],
     classifiers=[

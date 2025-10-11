@@ -1,5 +1,6 @@
 from types import SimpleNamespace
 
+
 BITCOIN_API_BASE_URL = 'https://blockstream.info/api/'
 BITCOIN_TESTNET_API_BASE_URL = 'https://blockstream.info/testnet/api/'
 BITCOIN_SIGNET_API_BASE_URL = 'https://blockstream.info/signet/api/'

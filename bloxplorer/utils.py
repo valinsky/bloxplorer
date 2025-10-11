@@ -1,6 +1,6 @@
 from urllib.parse import urljoin
 
-import requests
+import httpx
 
 from bloxplorer.constants import (
     CONTENT_TYPE_JSON, CONTENT_TYPE_TEXT, DEFAULT_TIMEOUT, INVALID_API_RESOURCE_MESSAGE,
@@ -47,17 +47,18 @@ class Request:
         :return: :class: `Response` object.
         """
         try:
-            response = requests.request(method, url, timeout=timeout, **kwargs)
+            with httpx.Client() as client:
+                response = client.request(method, url, timeout=timeout, **kwargs)
 
-        except requests.exceptions.Timeout:
+        except httpx.TimeoutException:
             raise BlockstreamClientTimeout(
                 message=REQUEST_TIMED_OUT_MESSAGE, resource_url=url, request_method=method)
 
-        except requests.exceptions.ConnectionError:
+        except httpx.NetworkError:
             raise BlockstreamClientNetworkError(
                 message=NETWORK_ERROR_MESSAGE, resource_url=url, request_method=method)
 
-        except requests.exceptions.RequestException as e:
+        except httpx.RequestError as e:
             raise BlockstreamClientError(message=f'{e}', resource_url=url, request_method=method)
 
         return self._handle_response(response)
@@ -90,15 +91,15 @@ class Request:
         elif content_type == CONTENT_TYPE_TEXT:
             data = response.text
 
-        if response.status_code == requests.codes.ok:
+        if response.status_code == httpx.codes.ok:
             return Response(response, data)
 
-        if response.status_code == requests.codes.bad_request:
+        if response.status_code == httpx.codes.bad_request:
             raise BlockstreamApiError(
                 message=data, resource_url=response.url, request_method=method,
                 status_code=response.status_code)
 
-        if response.status_code == requests.codes.not_found:
+        if response.status_code == httpx.codes.not_found:
             raise BlockstreamApiError(
                 message=INVALID_API_RESOURCE_MESSAGE, resource_url=response.url, request_method=method,
                 status_code=response.status_code)
