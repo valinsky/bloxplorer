@@ -1,8 +1,8 @@
 from bloxplorer.addresses import Addresses
 from bloxplorer.blocks import Blocks
 from bloxplorer.constants import (
-    BECH32, BIP32_PRVKEY, BIP32_PUBKEY, BITCOIN_API_BASE_URL, BITCOIN_TESTNET_API_BASE_URL,
-    BITCOIN_SIGNET_API_BASE_URL, LIQUID_API_BASE_URL, P2PKH, P2SH, UNRECOGNIZED_ADDRESS_TYPE
+    BECH32, BIP32_PRVKEY, BIP32_PUBKEY, BITCOIN_API_BASE_URL, BITCOIN_SIGNET_API_BASE_URL,
+    BITCOIN_TESTNET_API_BASE_URL, LIQUID_API_BASE_URL, P2PKH, P2SH, UNRECOGNIZED_ADDRESS_TYPE
 )
 from bloxplorer.fees import Fees
 from bloxplorer.issued_assets import IssuedAssets

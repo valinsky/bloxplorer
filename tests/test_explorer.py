@@ -1,9 +1,11 @@
 import pytest
 
-from bloxplorer import bitcoin_explorer, bitcoin_testnet_explorer, bitcoin_signet_explorer, liquid_explorer
+from bloxplorer import (
+    bitcoin_explorer, bitcoin_signet_explorer, bitcoin_testnet_explorer, liquid_explorer
+)
 from bloxplorer.constants import (
-    BECH32, BIP32_PRVKEY, BIP32_PUBKEY, BITCOIN_API_BASE_URL, BITCOIN_TESTNET_API_BASE_URL,
-    BITCOIN_SIGNET_API_BASE_URL, LIQUID_API_BASE_URL, P2PKH, P2SH, UNRECOGNIZED_ADDRESS_TYPE
+    BECH32, BIP32_PRVKEY, BIP32_PUBKEY, BITCOIN_API_BASE_URL, BITCOIN_SIGNET_API_BASE_URL,
+    BITCOIN_TESTNET_API_BASE_URL, LIQUID_API_BASE_URL, P2PKH, P2SH, UNRECOGNIZED_ADDRESS_TYPE
 )
 
 

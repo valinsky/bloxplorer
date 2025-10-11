@@ -1,4 +1,6 @@
-from bloxplorer.explorer import BitcoinExplorer, BitcoinTestnetExplorer, BitcoinSignetExplorer, LiquidExplorer
+from bloxplorer.explorer import (
+    BitcoinExplorer, BitcoinSignetExplorer, BitcoinTestnetExplorer, LiquidExplorer
+)
 
 """
 Usage::
