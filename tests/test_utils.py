@@ -37,7 +37,7 @@ def test__request(mocker):
     mock_request = mocker.patch('bloxplorer.utils.httpx.Client.request')
     mock_response = MagicMock()
     mock_request.return_value = mock_response
-    mock_handle_response = mocker.patch('bloxplorer.utils.SyncRequest._handle_response')
+    mock_handle_response = mocker.patch('bloxplorer.utils.BaseRequest._handle_response')
 
     request = SyncRequest(BASE_URL_TEST)
     request.make_request(method, url)
@@ -51,6 +51,7 @@ def test__request_parameters(mocker):
     url = f'{BASE_URL_TEST}/42'
     timeout = 10
     headers = {
+        'content-type': CONTENT_TYPE_JSON,
         'blah': 'blah'
     }
     kwargzilla = 'yeet'
@@ -58,7 +59,7 @@ def test__request_parameters(mocker):
     mock_request = mocker.patch('bloxplorer.utils.httpx.Client.request')
     mock_response = MagicMock()
     mock_request.return_value = mock_response
-    mock_handle_response = mocker.patch('bloxplorer.utils.SyncRequest._handle_response')
+    mock_handle_response = mocker.patch('bloxplorer.utils.BaseRequest._handle_response')
 
     request = SyncRequest(BASE_URL_TEST)
     request.make_request(method, url, timeout=timeout, headers=headers, kwargzilla=kwargzilla)
