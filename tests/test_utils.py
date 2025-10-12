@@ -1,18 +1,16 @@
 import json
 
 from unittest.mock import MagicMock
-from urllib.parse import urljoin
 
-import pytest
 import httpx
+import pytest
 
 from bloxplorer.constants import CONTENT_TYPE_JSON, CONTENT_TYPE_TEXT, DEFAULT_TIMEOUT, http
 from bloxplorer.exceptions import (
     BlockstreamApiError, BlockstreamClientError, BlockstreamClientNetworkError,
     BlockstreamClientTimeout
 )
-from bloxplorer.utils import Request
-
+from bloxplorer.utils import SyncRequest
 
 BASE_URL_TEST = 'http://thecakeisalie.com/api/'
 
@@ -39,10 +37,10 @@ def test__request(mocker):
     mock_request = mocker.patch('bloxplorer.utils.httpx.Client.request')
     mock_response = MagicMock()
     mock_request.return_value = mock_response
-    mock_handle_response = mocker.patch('bloxplorer.utils.Request._handle_response')
+    mock_handle_response = mocker.patch('bloxplorer.utils.SyncRequest._handle_response')
 
-    request = Request(BASE_URL_TEST)
-    request._request(method, url)
+    request = SyncRequest(BASE_URL_TEST)
+    request.make_request(method, url)
 
     mock_request.assert_called_with(method, url, timeout=DEFAULT_TIMEOUT)
     mock_handle_response.assert_called_with(mock_response)
@@ -60,10 +58,10 @@ def test__request_parameters(mocker):
     mock_request = mocker.patch('bloxplorer.utils.httpx.Client.request')
     mock_response = MagicMock()
     mock_request.return_value = mock_response
-    mock_handle_response = mocker.patch('bloxplorer.utils.Request._handle_response')
+    mock_handle_response = mocker.patch('bloxplorer.utils.SyncRequest._handle_response')
 
-    request = Request(BASE_URL_TEST)
-    request._request(method, url, timeout=timeout, headers=headers, kwargzilla=kwargzilla)
+    request = SyncRequest(BASE_URL_TEST)
+    request.make_request(method, url, timeout=timeout, headers=headers, kwargzilla=kwargzilla)
 
     mock_request.assert_called_with(method, url, timeout=timeout, headers=headers, kwargzilla=kwargzilla)
     mock_handle_response.assert_called_with(mock_response)
@@ -81,32 +79,22 @@ def test__request_raises(mocker, exception, raised_exception):
     mock_request = mocker.patch('bloxplorer.utils.httpx.Client.request')
     mock_request.side_effect = exception
 
-    request = Request(BASE_URL_TEST)
+    request = SyncRequest(BASE_URL_TEST)
 
     with pytest.raises(raised_exception):
-        request._request(http.GET, url)
-
-
-def test__prepare_resource_url():
-    path = 'answer/is/42'
-    expected = f'{BASE_URL_TEST}answer/is/42'
-
-    request = Request(BASE_URL_TEST)
-
-    assert request._prepare_resource_url(path) == expected
+        request.make_request(http.GET, url)
 
 
 def test_make_request(mocker):
     method = http.GET
     path = 'answer/is/42'
-    url = urljoin(BASE_URL_TEST, path)
     kwargs = {'nitty': 'gritty'}
-    mock__request = mocker.patch('bloxplorer.utils.Request._request')
+    mock__request = mocker.patch('bloxplorer.utils.SyncRequest.make_request')
 
-    request = Request(BASE_URL_TEST)
+    request = SyncRequest(BASE_URL_TEST)
     request.make_request(method, path, **kwargs)
 
-    mock__request.assert_called_with(method, url, **kwargs)
+    mock__request.assert_called_with(method, path, **kwargs)
 
 
 def test__handle_response_json(mocker):
@@ -118,7 +106,7 @@ def test__handle_response_json(mocker):
         data=data, headers=headers, status_code=httpx.codes.ok, url=url, method=method
     )
 
-    response = Request._handle_response(response)
+    response = SyncRequest._handle_response(response)
 
     assert response.resource_url == url
     assert response.headers == headers
@@ -136,7 +124,7 @@ def test__handle_response_text(mocker):
         data=data, headers=headers, status_code=httpx.codes.ok, url=url, method=method
     )
 
-    response = Request._handle_response(response)
+    response = SyncRequest._handle_response(response)
 
     assert response.resource_url == url
     assert response.headers == headers
@@ -162,7 +150,7 @@ def test__handle_response_raises(mocker, status_code, exception):
     )
 
     with pytest.raises(exception):
-        response = Request._handle_response(response)
+        response = SyncRequest._handle_response(response)
 
         assert response.resource_url == url
         assert response.headers == headers

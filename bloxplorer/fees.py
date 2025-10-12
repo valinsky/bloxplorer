@@ -1,8 +1,8 @@
 from bloxplorer.constants import http
-from bloxplorer.utils import Request
+from bloxplorer.utils import AsyncRequest, SyncRequest
 
 
-class Fees(Request):
+class SyncFees(SyncRequest):
     """
     Wrapper class around the Esplora Fee Estimates endpoint.
 
@@ -24,3 +24,8 @@ class Fees(Request):
         :return: :class: `Response` object.
         """
         return self.make_request(http.GET, 'fee-estimates', **kwargs)
+
+
+class AsyncFees(AsyncRequest):
+    async def get_estimates(self, **kwargs):
+        return await self.make_request(http.GET, 'fee-estimates', **kwargs)

@@ -1,6 +1,6 @@
-from urllib.parse import urljoin
-
 import httpx
+
+from pydantic import BaseModel
 
 from bloxplorer.constants import (
     CONTENT_TYPE_JSON, CONTENT_TYPE_TEXT, DEFAULT_TIMEOUT, INVALID_API_RESOURCE_MESSAGE,
@@ -12,66 +12,11 @@ from bloxplorer.exceptions import (
 )
 
 
-class Request:
-    """
-    Parent class used to send requests to, and handle responses from, the Blockstream Esplora API.
-    """
-
-    __slots__ = ('base_url', )
+class BaseRequest:
+    __slots__ = ('_base_url', )
 
     def __init__(self, base_url):
-        self.base_url = base_url
-
-    def make_request(self, method, path, **kwargs):
-        r"""
-        Send an http request to the Esplora endpoint specified by `path`.
-
-        :param method: The request method (get or post).
-        :param path: String representing the URL resource path.
-        :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
-
-        :return: :class: `Response` object.
-        """
-        url = self._prepare_resource_url(path)
-        return self._request(method, url, **kwargs)
-
-    def _request(self, method, url, timeout=DEFAULT_TIMEOUT, **kwargs):
-        r"""
-        Helper method that sends an http request and handles the response.
-
-        :param method: The request method (get or post).
-        :param url: String representing the resource URL.
-        :param timeout: (Optional) The request timeout. Default is 5 seconds.
-        :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
-
-        :return: :class: `Response` object.
-        """
-        try:
-            with httpx.Client() as client:
-                response = client.request(method, url, timeout=timeout, **kwargs)
-
-        except httpx.TimeoutException:
-            raise BlockstreamClientTimeout(
-                message=REQUEST_TIMED_OUT_MESSAGE, resource_url=url, request_method=method)
-
-        except httpx.NetworkError:
-            raise BlockstreamClientNetworkError(
-                message=NETWORK_ERROR_MESSAGE, resource_url=url, request_method=method)
-
-        except httpx.RequestError as e:
-            raise BlockstreamClientError(message=f'{e}', resource_url=url, request_method=method)
-
-        return self._handle_response(response)
-
-    def _prepare_resource_url(self, path):
-        """
-        Helper method that construct the resource URL from `base_url` and a specified `path`
-
-        :param path: String representing the URL resource path.
-
-        :return: String representing the full resource URL.
-        """
-        return urljoin(self.base_url, path)
+        self._base_url = base_url
 
     @staticmethod
     def _handle_response(response):
@@ -83,6 +28,7 @@ class Request:
         :return: :class: `Response` object.
         """
         method = response.request.method
+        resource_url = f'{response.url}'
         content_type = response.headers.get('content-type')
         data = None
 
@@ -92,32 +38,100 @@ class Request:
             data = response.text
 
         if response.status_code == httpx.codes.ok:
-            return Response(response, data)
+            return Response(
+                resource_url=resource_url,
+                headers=dict(response.headers),
+                method=method,
+                data=data,
+            )
 
         if response.status_code == httpx.codes.bad_request:
             raise BlockstreamApiError(
-                message=data, resource_url=response.url, request_method=method,
+                message=data, resource_url=resource_url, request_method=method,
                 status_code=response.status_code)
 
         if response.status_code == httpx.codes.not_found:
             raise BlockstreamApiError(
-                message=INVALID_API_RESOURCE_MESSAGE, resource_url=response.url, request_method=method,
+                message=INVALID_API_RESOURCE_MESSAGE, resource_url=resource_url, request_method=method,
                 status_code=response.status_code)
 
         raise BlockstreamApiError(
             message=UNKNOWN_ERROR_MESSAGE,
-            resource_url=response.url, request_method=method, status_code=response.status_code)
+            resource_url=resource_url, request_method=method, status_code=response.status_code)
 
 
-class Response:
+class SyncRequest(BaseRequest):
     """
-    Class used to create the `Response` object returned after an API call.
+    Parent class used to send sync requests to, and handle responses from, the Blockstream Esplora API.
     """
 
-    __slots__ = ('resource_url', 'headers', 'method', 'data', )
+    def make_request(self, method, path, timeout=DEFAULT_TIMEOUT, **kwargs):
+        r"""
+        Send an http sync request to the Esplora endpoint specified by `path`.
 
-    def __init__(self, response, data):
-        self.resource_url = response.url
-        self.headers = response.headers
-        self.method = response.request.method
-        self.data = data
+        :param method: The request method (get or post).
+        :param path: String representing the URL resource path.
+        :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
+
+        :return: :class: `Response` object.
+        """
+        try:
+            with httpx.Client(base_url=self._base_url) as client:
+                response = client.request(method, path, timeout=timeout, **kwargs)
+
+        except httpx.TimeoutException:
+            raise BlockstreamClientTimeout(
+                message=REQUEST_TIMED_OUT_MESSAGE, resource_url=path, request_method=method)
+
+        except httpx.NetworkError:
+            raise BlockstreamClientNetworkError(
+                message=NETWORK_ERROR_MESSAGE, resource_url=path, request_method=method)
+
+        except httpx.RequestError as e:
+            raise BlockstreamClientError(message=f'{e}', resource_url=path, request_method=method)
+
+        return self._handle_response(response)
+
+
+class AsyncRequest(BaseRequest):
+    """
+    Parent class used to send async requests to, and handle responses from, the Blockstream Esplora API.
+    """
+
+    async def make_request(self, method, path, timeout=DEFAULT_TIMEOUT, **kwargs):
+        r"""
+        Send an http async request to the Esplora endpoint specified by `path`.
+
+        :param method: The request method (get or post).
+        :param path: String representing the URL resource path.
+        :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
+
+        :return: :class: `Response` object.
+        """
+        try:
+            async with httpx.AsyncClient(base_url=self._base_url) as client:
+                response = await client.request(method, path, timeout=timeout, **kwargs)
+
+        # TODO: add full resource_url
+        except httpx.TimeoutException:
+            raise BlockstreamClientTimeout(
+                message=REQUEST_TIMED_OUT_MESSAGE, resource_url=path, request_method=method)
+
+        except httpx.NetworkError:
+            raise BlockstreamClientNetworkError(
+                message=NETWORK_ERROR_MESSAGE, resource_url=path, request_method=method)
+
+        except httpx.RequestError as e:
+            raise BlockstreamClientError(message=f'{e}', resource_url=path, request_method=method)
+
+        return self._handle_response(response)
+
+
+class Response(BaseModel):
+    """
+    The `Response` model returned after an API call.
+    """
+    resource_url: str
+    headers: dict
+    method: str
+    data: str | dict

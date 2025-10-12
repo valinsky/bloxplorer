@@ -1,8 +1,8 @@
 from bloxplorer.constants import http
-from bloxplorer.utils import Request
+from bloxplorer.utils import AsyncRequest, SyncRequest
 
 
-class Mempool(Request):
+class SyncMempool(SyncRequest):
     """
     Wrapper class around the Esplora Mempool endpoint.
 
@@ -43,3 +43,15 @@ class Mempool(Request):
         :return: :class: `Response` object.
         """
         return self.make_request(http.GET, 'mempool/recent', **kwargs)
+
+
+class AsyncMempool(AsyncRequest):
+
+    async def get(self, **kwargs):
+        return await self.make_request(http.GET, 'mempool', **kwargs)
+
+    async def get_txids(self, **kwargs):
+        return await self.make_request(http.GET, 'mempool/txids', **kwargs)
+
+    async def get_latest_txs(self, **kwargs):
+        return await self.make_request(http.GET, 'mempool/recent', **kwargs)
