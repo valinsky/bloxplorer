@@ -17,7 +17,7 @@ Usage
 
 After installation, you can import and use the desired explorer and its methods.
 For a full list of available methods :ref:`click here <api>`.
-The available explorers are Bitcoin, Liquid and Bitcoin Testnet:
+The available explorers are Bitcoin, Bitcoin Testnet, Bitcoin Signet and Liquid:
 
 Bitcoin Explorer
 ----------------
