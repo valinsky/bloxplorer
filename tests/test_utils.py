@@ -1,6 +1,7 @@
+import asyncio
 import json
 
-from unittest.mock import MagicMock
+from unittest.mock import AsyncMock, MagicMock
 
 import httpx
 import pytest
@@ -10,7 +11,7 @@ from bloxplorer.exceptions import (
     BlockstreamApiError, BlockstreamClientError, BlockstreamClientNetworkError,
     BlockstreamClientTimeout
 )
-from bloxplorer.utils import SyncRequest
+from bloxplorer.utils import AsyncRequest, SyncRequest
 
 BASE_URL_TEST = 'http://thecakeisalie.com/api/'
 
@@ -31,7 +32,7 @@ class MockResponse:
         return str(self.data)
 
 
-def test__request(mocker):
+def test_make_request(mocker):
     method = http.GET
     url = f'{BASE_URL_TEST}/42'
     mock_request = mocker.patch('bloxplorer.utils.httpx.Client.request')
@@ -46,7 +47,7 @@ def test__request(mocker):
     mock_handle_response.assert_called_with(mock_response)
 
 
-def test__request_parameters(mocker):
+def test_make_request_parameters(mocker):
     method = http.GET
     url = f'{BASE_URL_TEST}/42'
     timeout = 10
@@ -75,7 +76,7 @@ def test__request_parameters(mocker):
         (httpx.RequestError('Test request error'), BlockstreamClientError),
     )
 )
-def test__request_raises(mocker, exception, raised_exception):
+def test_make_request_raises(mocker, exception, raised_exception):
     url = f'{BASE_URL_TEST}/42'
     mock_request = mocker.patch('bloxplorer.utils.httpx.Client.request')
     mock_request.side_effect = exception
@@ -158,3 +159,18 @@ def test__handle_response_raises(mocker, status_code, exception):
         assert response.method == method
         assert isinstance(response.data, str)
         assert response.data == data
+
+
+def test_make_request_async(mocker):
+    method = http.GET
+    url = f'{BASE_URL_TEST}/42'
+    mock_request = mocker.patch('bloxplorer.utils.httpx.AsyncClient.request')
+    mock_response = AsyncMock()
+    mock_request.return_value = mock_response
+    mock_handle_response = mocker.patch('bloxplorer.utils.BaseRequest._handle_response')
+
+    request = AsyncRequest(BASE_URL_TEST)
+    asyncio.run(request.make_request(method, url))
+
+    mock_request.assert_called_with(method, url, timeout=DEFAULT_TIMEOUT)
+    mock_handle_response.assert_called_with(mock_response)
