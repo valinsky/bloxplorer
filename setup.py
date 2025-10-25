@@ -6,7 +6,7 @@ with open('README.rst', 'r') as f:
 setuptools.setup(
     name='bloxplorer',
     version='0.1.12',
-    description='Bitcoin and Liquid blockchain explorer',
+    description='Bitcoin blockchain explorer',
     long_description=readme,
     author='Vali Voicu',
     author_email='contact@valinsky.me',
@@ -14,7 +14,7 @@ setuptools.setup(
     license='MIT',
     packages=['bloxplorer'],
     include_package_data=True,
-    install_requires=['httpx'],
+    install_requires=['httpx', 'pydantic',],
     test_suite='tests',
     tests_require=['pytest'],
     classifiers=[

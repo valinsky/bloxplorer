@@ -127,4 +127,4 @@ class Response(BaseModel):
     resource_url: str
     headers: dict
     method: str
-    data: str | dict
+    data: str | dict | list
