@@ -5,15 +5,32 @@ Mempool
 
 The Mempool class is available in all explorers.
 
-Usage
-*****
+Sync Usage
+**********
 
 .. code-block:: python
 
-    from bloxplorer import bitcoin_testnet_explorer as explorer
+    from bloxplorer import bitcoin_explorer as explorer
 
     result = explorer.mempool.get()
     print(result.data)
+
+Async Usage
+***********
+
+.. code-block:: python
+
+    from bloxplorer import async_bitcoin_explorer as async_explorer
+
+    result = await async_explorer.mempool.get()
+    print(result.data)
+
+Result
+******
+
+Both usages will output the same result data. Example output:
+
+.. code-block:: python
 
     """
     {
@@ -29,5 +46,8 @@ Usage
     }
     """
 
-.. autoclass:: bloxplorer.mempool.Mempool
+Available methods
+*****************
+
+.. autoclass:: bloxplorer.mempool.SyncMempool
     :members:

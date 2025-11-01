@@ -4,7 +4,7 @@ API Documentation
 =================
 
 The `Blockstream Esplora API <https://github.com/Blockstream/esplora/blob/master/API.md>`_ exposes
-multiple endpoints and methods associated with the following resources:
+multiple endpoints associated with the following resources:
 `Transactions <https://github.com/Blockstream/esplora/blob/master/API.md#transactions>`_,
 `Addresses <https://github.com/Blockstream/esplora/blob/master/API.md#addresses>`_,
 `Blocks <https://github.com/Blockstream/esplora/blob/master/API.md#blocks>`_,
@@ -12,9 +12,9 @@ multiple endpoints and methods associated with the following resources:
 `Fee estimates <https://github.com/Blockstream/esplora/blob/master/API.md#fee-estimates>`_ and
 `Issued assets <https://github.com/Blockstream/esplora/blob/master/API.md#issued-assets-elementsliquid-only>`_.
 
-Bloxplorer is a Python wrapper around these resources and methods.
+Bloxplorer is a Python wrapper around these endpoints.
 
-The explorers are instantiated with the following base urls:
+The explorers are instantiated with the following endpoint urls:
 
 * Bitcoin Explorer: https://blockstream.info/api/
 * Bitcoin Testnet Explorer: https://blockstream.info/testnet/api/
