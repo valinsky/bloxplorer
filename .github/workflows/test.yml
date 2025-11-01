@@ -30,7 +30,7 @@ jobs:
 
       - name: Run tests
         run: |
-          python -m pytest --cov . --cov-fail-under=97
+          python -m pytest --cov . --cov-fail-under=98
 
       - name: Run flake8 and isort
         run: |
