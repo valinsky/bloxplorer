@@ -18,7 +18,7 @@ setuptools.setup(
     test_suite='tests',
     tests_require=['pytest'],
     classifiers=[
-        'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.14',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
