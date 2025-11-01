@@ -48,7 +48,7 @@ Links
 .. |CI| image:: https://github.com/valinsky/bloxplorer/actions/workflows/test.yml/badge.svg
     :target: https://github.com/valinsky/bloxplorer/actions/
 
-.. |version| image:: https://img.shields.io/badge/version-0.1.12-blue
+.. |version| image:: https://img.shields.io/badge/version-0.2.0-blue
     :target: https://pypi.org/project/bloxplorer/
 
 .. |license| image:: https://img.shields.io/badge/license-MIT-orange
