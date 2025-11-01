@@ -13,6 +13,8 @@ Bitcoin and Liquid Blockchain Explorer
 It allows developers to make use of the full power of the `Blockstream Esplora HTTP API
 <https://github.com/Blockstream/esplora/blob/master/API.md>`_ through a clean Python interface.
 
+Now with async support.
+
 Usage
 -----
 
