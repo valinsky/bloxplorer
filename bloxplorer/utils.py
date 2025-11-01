@@ -1,6 +1,11 @@
-from urllib.parse import urljoin
+import asyncio
+import inspect
 
-import requests
+from abc import ABC
+
+import httpx
+
+from pydantic import BaseModel
 
 from bloxplorer.constants import (
     CONTENT_TYPE_JSON, CONTENT_TYPE_TEXT, DEFAULT_TIMEOUT, INVALID_API_RESOURCE_MESSAGE,
@@ -12,65 +17,45 @@ from bloxplorer.exceptions import (
 )
 
 
-class Request:
-    """
-    Parent class used to send requests to, and handle responses from, the Blockstream Esplora API.
-    """
-
-    __slots__ = ('base_url', )
+class BaseRequest(ABC):
+    __slots__ = ('_base_url', )
 
     def __init__(self, base_url):
-        self.base_url = base_url
+        self._base_url = base_url
 
-    def make_request(self, method, path, **kwargs):
+    @staticmethod
+    async def _make_request(client, method, path, timeout, **kwargs):
         r"""
-        Send an http request to the Esplora endpoint specified by `path`.
+        Send a request to the Esplora API.
 
+        :param client: `httpx.Client` or `httpx.AsyncClient` instance.
         :param method: The request method (get or post).
         :param path: String representing the URL resource path.
-        :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
-
-        :return: :class: `Response` object.
-        """
-        url = self._prepare_resource_url(path)
-        return self._request(method, url, **kwargs)
-
-    def _request(self, method, url, timeout=DEFAULT_TIMEOUT, **kwargs):
-        r"""
-        Helper method that sends an http request and handles the response.
-
-        :param method: The request method (get or post).
-        :param url: String representing the resource URL.
-        :param timeout: (Optional) The request timeout. Default is 5 seconds.
+        :param timeout: The request timeout in seconds.
         :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
 
         :return: :class: `Response` object.
         """
         try:
-            response = requests.request(method, url, timeout=timeout, **kwargs)
+            response = client.request(method, path, timeout=timeout, **kwargs)
+            if inspect.isawaitable(response):
+                response = await response
 
-        except requests.exceptions.Timeout:
+        except httpx.TimeoutException:
             raise BlockstreamClientTimeout(
-                message=REQUEST_TIMED_OUT_MESSAGE, resource_url=url, request_method=method)
+                message=REQUEST_TIMED_OUT_MESSAGE, resource_url=path, request_method=method)
 
-        except requests.exceptions.ConnectionError:
+        except httpx.NetworkError:
             raise BlockstreamClientNetworkError(
-                message=NETWORK_ERROR_MESSAGE, resource_url=url, request_method=method)
+                message=NETWORK_ERROR_MESSAGE, resource_url=path, request_method=method)
 
-        except requests.exceptions.RequestException as e:
-            raise BlockstreamClientError(message=f'{e}', resource_url=url, request_method=method)
+        except httpx.RequestError as e:
+            raise BlockstreamClientError(message=f'{e}', resource_url=path, request_method=method)
 
-        return self._handle_response(response)
+        return BaseRequest._handle_response(response)
 
-    def _prepare_resource_url(self, path):
-        """
-        Helper method that construct the resource URL from `base_url` and a specified `path`
-
-        :param path: String representing the URL resource path.
-
-        :return: String representing the full resource URL.
-        """
-        return urljoin(self.base_url, path)
+    def make_request(self, method, path, timeout=DEFAULT_TIMEOUT, **kwargs):
+        raise NotImplementedError('This method should be implemented in a subclass.')
 
     @staticmethod
     def _handle_response(response):
@@ -82,41 +67,64 @@ class Request:
         :return: :class: `Response` object.
         """
         method = response.request.method
+        resource_url = f'{response.url}'
         content_type = response.headers.get('content-type')
-        data = None
 
+        data = None
         if content_type == CONTENT_TYPE_JSON:
             data = response.json()
         elif content_type == CONTENT_TYPE_TEXT:
             data = response.text
 
-        if response.status_code == requests.codes.ok:
-            return Response(response, data)
+        if response.status_code == httpx.codes.ok:
+            return Response(
+                resource_url=resource_url,
+                headers=dict(response.headers),
+                method=method,
+                data=data,
+            )
 
-        if response.status_code == requests.codes.bad_request:
+        if response.status_code == httpx.codes.bad_request:
             raise BlockstreamApiError(
-                message=data, resource_url=response.url, request_method=method,
+                message=data, resource_url=resource_url, request_method=method,
                 status_code=response.status_code)
 
-        if response.status_code == requests.codes.not_found:
+        if response.status_code == httpx.codes.not_found:
             raise BlockstreamApiError(
-                message=INVALID_API_RESOURCE_MESSAGE, resource_url=response.url, request_method=method,
+                message=INVALID_API_RESOURCE_MESSAGE, resource_url=resource_url, request_method=method,
                 status_code=response.status_code)
 
         raise BlockstreamApiError(
             message=UNKNOWN_ERROR_MESSAGE,
-            resource_url=response.url, request_method=method, status_code=response.status_code)
+            resource_url=resource_url, request_method=method, status_code=response.status_code)
 
 
-class Response:
+class SyncRequest(BaseRequest):
     """
-    Class used to create the `Response` object returned after an API call.
+    Class used to make sync requests.
+    """
+    def make_request(self, method, path, timeout=DEFAULT_TIMEOUT, **kwargs):
+        with httpx.Client(base_url=self._base_url) as client:
+            return asyncio.run(
+                self._make_request(client, method, path, timeout, **kwargs)
+            )
+
+
+class AsyncRequest(BaseRequest):
+    """
+    Class used to make async requests.
     """
 
-    __slots__ = ('resource_url', 'headers', 'method', 'data', )
+    async def make_request(self, method, path, timeout=DEFAULT_TIMEOUT, **kwargs):
+        async with httpx.AsyncClient(base_url=self._base_url) as client:
+            return await self._make_request(client, method, path, timeout=timeout, **kwargs)
 
-    def __init__(self, response, data):
-        self.resource_url = response.url
-        self.headers = response.headers
-        self.method = response.request.method
-        self.data = data
+
+class Response(BaseModel):
+    """
+    The `Response` model returned after an API call.
+    """
+    resource_url: str
+    headers: dict
+    method: str
+    data: str | dict | list

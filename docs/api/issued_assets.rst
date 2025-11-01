@@ -1,12 +1,12 @@
-.. _issues_assets:
+.. _issued_assets:
 
 Issued Assets
 =============
 
 The Issued Assets class is available only for the Liquid explorer.
 
-Usage
-*****
+Sync Usage
+**********
 
 .. code-block:: python
 
@@ -14,6 +14,23 @@ Usage
 
     result = explorer.assets.get('aa775044c32a7df391902b3659f46dfe004ccb2644ce2ddc7dba31e889391caf')
     print(result.data)
+
+Async Usage
+***********
+
+.. code-block:: python
+
+    from bloxplorer import async_liquid_explorer as async_explorer
+
+    result = await async_explorer.assets.get('aa775044c32a7df391902b3659f46dfe004ccb2644ce2ddc7dba31e889391caf')
+    print(result.data)
+
+Result
+******
+
+Both usages will output the same result data. Example output:
+
+.. code-block:: python
 
     """
     {
@@ -71,5 +88,8 @@ Usage
     }
     """
 
-.. autoclass:: bloxplorer.issued_assets.IssuedAssets
+Available methods
+*****************
+
+.. autoclass:: bloxplorer.issued_assets.SyncIssuedAssets
     :members:

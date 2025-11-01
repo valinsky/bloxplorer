@@ -1,17 +1,14 @@
 from bloxplorer.constants import http
-from bloxplorer.utils import Request
+from bloxplorer.utils import AsyncRequest, SyncRequest
 
 
-class Addresses(Request):
+class SyncAddresses(SyncRequest):
     """
     Wrapper class around the Esplora Addresses endpoint.
 
     `Blockstream Esplora Addresses API Docs
     <https://github.com/Blockstream/esplora/blob/master/API.md#addresses>`_
     """
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
 
     def get(self, address, **kwargs):
         r"""
@@ -156,14 +153,43 @@ class Addresses(Request):
         """
         return self.make_request(http.GET, f'address-prefix/{prefix}', **kwargs)
 
-    @staticmethod
-    def get_address_type(address):
-        """
-        Get the Bitcoin address type.
-        Not available for Liquid.
 
-        :param address: The alphanumeric Bitcoin address
+class AsyncAddresses(AsyncRequest):
+    async def get(self, address, **kwargs):
+        return await self.make_request(http.GET, f'address/{address}', **kwargs)
 
-        :return: String representing the address type (P2PKH, P2SH, etc.)
-        """
-        pass
+    async def get_scripthash(self, hash, **kwargs):
+        return await self.make_request(http.GET, f'scripthash/{hash}', **kwargs)
+
+    async def get_tx_history(self, address, **kwargs):
+        return await self.make_request(http.GET, f'address/{address}/txs', **kwargs)
+
+    async def get_scripthash_tx_history(self, hash, **kwargs):
+        return await self.make_request(http.GET, f'scripthash/{hash}/txs', **kwargs)
+
+    async def get_confirmed_tx_history(self, address, last_seen_txid=None, **kwargs):
+        path = f'address/{address}/txs/chain'
+        if last_seen_txid is not None:
+            path += f'/{last_seen_txid}'
+        return await self.make_request(http.GET, path, **kwargs)
+
+    async def get_confirmed_scripthash_tx_history(self, hash, last_seen_txid=None, **kwargs):
+        path = f'scripthash/{hash}/txs/chain'
+        if last_seen_txid is not None:
+            path += f'/{last_seen_txid}'
+        return await self.make_request(http.GET, path, **kwargs)
+
+    async def get_unconfirmed_tx_history(self, address, **kwargs):
+        return await self.make_request(http.GET, f'address/{address}/txs/mempool', **kwargs)
+
+    async def get_unconfirmed_scripthash_tx_history(self, hash, **kwargs):
+        return await self.make_request(http.GET, f'scripthash/{hash}/txs/mempool', **kwargs)
+
+    async def get_utxo(self, address, **kwargs):
+        return await self.make_request(http.GET, f'address/{address}/utxo', **kwargs)
+
+    async def get_scripthash_utxo(self, hash, **kwargs):
+        return await self.make_request(http.GET, f'scripthash/{hash}/utxo', **kwargs)
+
+    async def get_address_prefix(self, prefix, **kwargs):
+        return await self.make_request(http.GET, f'address-prefix/{prefix}', **kwargs)

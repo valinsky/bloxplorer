@@ -13,5 +13,7 @@ jobs:
       pages: write
       id-token: write
     steps:
+    - name: Install pydata-sphinx-theme
+      run: pip install pydata-sphinx-theme
     - id: deployment
       uses: sphinx-notes/pages@v3

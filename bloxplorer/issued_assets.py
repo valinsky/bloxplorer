@@ -1,8 +1,8 @@
 from bloxplorer.constants import http
-from bloxplorer.utils import Request
+from bloxplorer.utils import AsyncRequest, SyncRequest
 
 
-class IssuedAssets(Request):
+class SyncIssuedAssets(SyncRequest):
     """
     Wrapper class around the Esplora Issued Assets endpoint.
     Only for Elements / Liquid.
@@ -10,9 +10,6 @@ class IssuedAssets(Request):
     `Blockstream Esplora Issued Assets API Docs
     <https://github.com/Blockstream/esplora/blob/master/API.md#assets-elementsliquid-only>`_
     """
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
 
     def get(self, asset_id, **kwargs):
         r"""
@@ -81,3 +78,27 @@ class IssuedAssets(Request):
         if decimal:
             path = f'{path}/decimal'
         return self.make_request(http.GET, path, **kwargs)
+
+
+class AsyncIssuedAssets(AsyncRequest):
+
+    async def get(self, asset_id, **kwargs):
+        return await self.make_request(http.GET, f'asset/{asset_id}', **kwargs)
+
+    async def get_txs(self, asset_id, **kwargs):
+        return await self.make_request(http.GET, f'asset/{asset_id}/txs', **kwargs)
+
+    async def get_mempool(self, asset_id, **kwargs):
+        return await self.make_request(http.GET, f'asset/{asset_id}/txs/mempool', **kwargs)
+
+    async def get_chain(self, asset_id, last_seen=None, **kwargs):
+        path = f'asset/{asset_id}/txs/chain'
+        if last_seen:
+            path = f'{path}/{last_seen}'
+        return await self.make_request(http.GET, path, **kwargs)
+
+    async def get_supply(self, asset_id, decimal=False, **kwargs):
+        path = f'asset/{asset_id}/supply'
+        if decimal:
+            path = f'{path}/decimal'
+        return await self.make_request(http.GET, path, **kwargs)

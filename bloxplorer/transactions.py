@@ -1,8 +1,8 @@
 from bloxplorer.constants import http
-from bloxplorer.utils import Request
+from bloxplorer.utils import AsyncRequest, SyncRequest
 
 
-class Transactions(Request):
+class SyncTransactions(SyncRequest):
     """
     Wrapper class around the Esplora Transactions endpoint.
 
@@ -109,3 +109,31 @@ class Transactions(Request):
         :return: :class: `Response` object.
         """
         return self.make_request(http.POST, 'tx', data=hex_tx, **kwargs)
+
+
+class AsyncTransactions(AsyncRequest):
+
+    async def get(self, tx_id, **kwargs):
+        return await self.make_request(http.GET, f'tx/{tx_id}', **kwargs)
+
+    async def get_status(self, tx_id, **kwargs):
+        return await self.make_request(http.GET, f'tx/{tx_id}/status', **kwargs)
+
+    async def get_raw(self, tx_id, **kwargs):
+        return await self.make_request(http.GET, f'tx/{tx_id}/raw', **kwargs)
+
+    async def get_hex(self, tx_id, **kwargs):
+        return await self.make_request(http.GET, f'tx/{tx_id}/hex', **kwargs)
+
+    async def get_merkleblock_proof(self, tx_id, **kwargs):
+        return await self.make_request(http.GET, f'tx/{tx_id}/merkleblock-proof', **kwargs)
+
+    async def get_merkle_proof(self, tx_id, **kwargs):
+        return await self.make_request(http.GET, f'tx/{tx_id}/merkle-proof', **kwargs)
+
+    async def get_spending_status(self, tx_id, vout=None, **kwargs):
+        path = f'tx/{tx_id}/outspend/{vout}' if vout is not None else f'tx/{tx_id}/outspends'
+        return await self.make_request(http.GET, path, **kwargs)
+
+    async def post(self, hex_tx, **kwargs):
+        return await self.make_request(http.POST, 'tx', data=hex_tx, **kwargs)

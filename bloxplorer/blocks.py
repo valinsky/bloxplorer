@@ -1,18 +1,14 @@
 from bloxplorer.constants import http
-from bloxplorer.utils import Request
+from bloxplorer.utils import AsyncRequest, SyncRequest
 
 
-class Blocks(Request):
+class SyncBlocks(SyncRequest):
     """
     Wrapper class around the Esplora Blocks endpoint.
 
     `Blockstream Esplora Blocks API Docs
     <https://github.com/Blockstream/esplora/blob/master/API.md#blocks>`_
     """
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # self.cache = {}
 
     def get(self, hash, **kwargs):
         r"""
@@ -115,3 +111,36 @@ class Blocks(Request):
         :return: :class: `Response` object.
         """
         return self.make_request(http.GET, 'blocks/tip/hash', **kwargs)
+
+
+class AsyncBlocks(AsyncRequest):
+    async def get(self, hash, **kwargs):
+        return await self.make_request(http.GET, f'block/{hash}', **kwargs)
+
+    async def get_status(self, hash, **kwargs):
+        return await self.make_request(http.GET, f'block/{hash}/status', **kwargs)
+
+    async def get_txs(self, hash, start_index=None, **kwargs):
+        path = f'block/{hash}/txs'
+        if start_index is not None:
+            path = f'{path}/{start_index}'
+        return await self.make_request(http.GET, path, **kwargs)
+
+    async def get_txids(self, hash, index=None, **kwargs):
+        path = f'block/{hash}/txid/{index}' if index is not None else f'block/{hash}/txids'
+        return await self.make_request(http.GET, path, **kwargs)
+
+    async def get_height(self, height, **kwargs):
+        return await self.make_request(http.GET, f'block-height/{height}', **kwargs)
+
+    async def get_blocks(self, start_height=None, **kwargs):
+        path = 'blocks'
+        if start_height is not None:
+            path = f'{path}/{start_height}'
+        return await self.make_request(http.GET, path, **kwargs)
+
+    async def get_last_height(self, **kwargs):
+        return await self.make_request(http.GET, 'blocks/tip/height', **kwargs)
+
+    async def get_last_hash(self, **kwargs):
+        return await self.make_request(http.GET, 'blocks/tip/hash', **kwargs)
