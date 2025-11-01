@@ -15,5 +15,7 @@ jobs:
     steps:
     - name: Install pydata-sphinx-theme
       run: pip install pydata-sphinx-theme
+    - name: Install requirements
+      run: pip install httpx pydantic
     - id: deployment
       uses: sphinx-notes/pages@v3
