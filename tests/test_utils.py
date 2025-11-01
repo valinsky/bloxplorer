@@ -87,7 +87,7 @@ def test_make_request_raises(mocker, exception, raised_exception):
         request.make_request(http.GET, url)
 
 
-def test_make_request(mocker):
+def test_make_request_kwargs(mocker):
     method = http.GET
     path = 'answer/is/42'
     kwargs = {'nitty': 'gritty'}

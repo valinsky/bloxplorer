@@ -10,6 +10,7 @@ from bloxplorer.constants import BITCOIN_API_BASE_URL, http
 SyncAddresses.make_request = MagicMock()
 sync_addresses = SyncAddresses(BITCOIN_API_BASE_URL)
 
+
 def test_get_address_sync():
     address = '1234'
     sync_addresses.get(address)
@@ -86,6 +87,7 @@ def test_get_address_prefix_sync():
 
 AsyncAddresses.make_request = AsyncMock()
 async_addresses = AsyncAddresses(BITCOIN_API_BASE_URL)
+
 
 def test_get_address_async():
     address = '1234'
