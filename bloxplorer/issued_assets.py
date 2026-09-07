@@ -79,6 +79,31 @@ class SyncIssuedAssets(SyncRequest):
             path = f'{path}/decimal'
         return self.make_request(http.GET, path, **kwargs)
 
+    def get_registry(self, start_index=None, limit=None, sort_field=None, sort_dir=None, **kwargs):
+        r"""
+        Get the list of issued assets in the asset registry.
+
+        :param start_index: (Optional) Integer offset for paging (default: 0).
+        :param limit: (Optional) Maximum number of assets to return (maximum: 100).
+        :param sort_field: (Optional) One of ``name``, ``ticker`` or ``domain``.
+        :param sort_dir: (Optional) One of ``asc`` or ``desc``.
+        :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
+
+        :return: :class: `Response` object.
+        """
+        params = dict(kwargs.pop('params', {}) or {})
+        for name, value in (
+            ('start_index', start_index),
+            ('limit', limit),
+            ('sort_field', sort_field),
+            ('sort_dir', sort_dir),
+        ):
+            if value is not None:
+                params[name] = value
+        if params:
+            kwargs['params'] = params
+        return self.make_request(http.GET, 'assets/registry', **kwargs)
+
 
 class AsyncIssuedAssets(AsyncRequest):
 
@@ -102,3 +127,17 @@ class AsyncIssuedAssets(AsyncRequest):
         if decimal:
             path = f'{path}/decimal'
         return await self.make_request(http.GET, path, **kwargs)
+
+    async def get_registry(self, start_index=None, limit=None, sort_field=None, sort_dir=None, **kwargs):
+        params = dict(kwargs.pop('params', {}) or {})
+        for name, value in (
+            ('start_index', start_index),
+            ('limit', limit),
+            ('sort_field', sort_field),
+            ('sort_dir', sort_dir),
+        ):
+            if value is not None:
+                params[name] = value
+        if params:
+            kwargs['params'] = params
+        return await self.make_request(http.GET, 'assets/registry', **kwargs)

@@ -5,7 +5,6 @@ from unittest.mock import AsyncMock, MagicMock
 from bloxplorer.constants import BITCOIN_API_BASE_URL, http
 from bloxplorer.fees import AsyncFees, SyncFees
 
-
 SyncFees.make_request = MagicMock()
 sync_fees = SyncFees(BITCOIN_API_BASE_URL)
 

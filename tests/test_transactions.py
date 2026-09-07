@@ -64,6 +64,20 @@ def test_post_tx_sync():
     sync_transactions.make_request.assert_called_with(http.POST, 'tx', data=tx_hex)
 
 
+def test_post_tx_package_sync():
+    tx_hexes = ['02000000...', '02000000...']
+    sync_transactions.post_package(tx_hexes)
+    sync_transactions.make_request.assert_called_with(http.POST, 'txs/package', json=tx_hexes)
+
+
+def test_post_tx_package_sync_accepts_iterable():
+    tx_hexes = iter(['02000000...', '02000000...'])
+    sync_transactions.post_package(tx_hexes)
+    sync_transactions.make_request.assert_called_with(
+        http.POST, 'txs/package', json=['02000000...', '02000000...']
+    )
+
+
 AsyncTransactions.make_request = AsyncMock()
 async_transactions = AsyncTransactions(BITCOIN_API_BASE_URL)
 
@@ -119,3 +133,17 @@ def test_post_tx_async():
     tx_hex = hex(1234567890)
     asyncio.run(async_transactions.post(tx_hex))
     async_transactions.make_request.assert_called_with(http.POST, 'tx', data=tx_hex)
+
+
+def test_post_tx_package_async():
+    tx_hexes = ['02000000...', '02000000...']
+    asyncio.run(async_transactions.post_package(tx_hexes))
+    async_transactions.make_request.assert_called_with(http.POST, 'txs/package', json=tx_hexes)
+
+
+def test_post_tx_package_async_accepts_iterable():
+    tx_hexes = iter(['02000000...', '02000000...'])
+    asyncio.run(async_transactions.post_package(tx_hexes))
+    async_transactions.make_request.assert_called_with(
+        http.POST, 'txs/package', json=['02000000...', '02000000...']
+    )

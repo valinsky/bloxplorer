@@ -75,6 +75,8 @@ class BaseRequest(ABC):
             data = response.json()
         elif content_type == CONTENT_TYPE_TEXT:
             data = response.text
+        else:
+            data = response.content
 
         if response.status_code == httpx.codes.ok:
             return Response(
@@ -127,4 +129,4 @@ class Response(BaseModel):
     resource_url: str
     headers: dict
     method: str
-    data: str | dict | list
+    data: str | dict | list | bytes

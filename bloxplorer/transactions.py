@@ -110,6 +110,22 @@ class SyncTransactions(SyncRequest):
         """
         return self.make_request(http.POST, 'tx', data=hex_tx, **kwargs)
 
+    def post_package(self, hex_txs, **kwargs):
+        r"""
+        Broadcast a package of raw transactions to the network.
+
+        The package should be provided as a list of transaction hex strings.
+        This endpoint requires Bitcoin Core 28.0 or later.
+
+        :param hex_txs: Iterable containing the transaction hex strings.
+        :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
+
+        :return: :class: `Response` object.
+        """
+        if not isinstance(hex_txs, list):
+            hex_txs = list(hex_txs)
+        return self.make_request(http.POST, 'txs/package', json=hex_txs, **kwargs)
+
 
 class AsyncTransactions(AsyncRequest):
 
@@ -137,3 +153,8 @@ class AsyncTransactions(AsyncRequest):
 
     async def post(self, hex_tx, **kwargs):
         return await self.make_request(http.POST, 'tx', data=hex_tx, **kwargs)
+
+    async def post_package(self, hex_txs, **kwargs):
+        if not isinstance(hex_txs, list):
+            hex_txs = list(hex_txs)
+        return await self.make_request(http.POST, 'txs/package', json=hex_txs, **kwargs)

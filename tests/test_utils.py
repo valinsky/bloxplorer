@@ -19,6 +19,7 @@ BASE_URL_TEST = 'http://thecakeisalie.com/api/'
 class MockResponse:
     def __init__(self, data, headers, status_code, url, method):
         self.data = data
+        self.content = data if isinstance(data, bytes) else str(data).encode()
         self.headers = headers
         self.status_code = status_code
         self.url = url
@@ -132,6 +133,24 @@ def test__handle_response_text(mocker):
     assert response.headers == headers
     assert response.method == method
     assert isinstance(response.data, str)
+    assert response.data == data
+
+
+def test__handle_response_binary(mocker):
+    url = f'{BASE_URL_TEST}block/42/raw'
+    headers = {'content-type': 'application/octet-stream'}
+    data = b'\x00\x01\x02'
+    method = http.GET
+    response = MockResponse(
+        data=data, headers=headers, status_code=httpx.codes.ok, url=url, method=method
+    )
+
+    response = SyncRequest._handle_response(response)
+
+    assert response.resource_url == url
+    assert response.headers == headers
+    assert response.method == method
+    assert isinstance(response.data, bytes)
     assert response.data == data
 
 

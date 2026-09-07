@@ -49,6 +49,20 @@ def test_get_supply_sync(asset_id, decimal, expected_url):
     sync_assets.make_request.assert_called_with(http.GET, expected_url)
 
 
+def test_get_registry_sync():
+    sync_assets.get_registry()
+    sync_assets.make_request.assert_called_with(http.GET, 'assets/registry')
+
+
+def test_get_registry_with_params_sync():
+    sync_assets.get_registry(start_index=10, limit=20, sort_field='name', sort_dir='desc')
+    sync_assets.make_request.assert_called_with(
+        http.GET,
+        'assets/registry',
+        params={'start_index': 10, 'limit': 20, 'sort_field': 'name', 'sort_dir': 'desc'},
+    )
+
+
 AsyncIssuedAssets.make_request = AsyncMock()
 async_assets = AsyncIssuedAssets(BITCOIN_API_BASE_URL)
 
@@ -89,3 +103,17 @@ def test_issued_asset_chain_async(asset_id, last_seen, expected_url):
 def test_get_supply_async(asset_id, decimal, expected_url):
     asyncio.run(async_assets.get_supply(asset_id, decimal))
     async_assets.make_request.assert_called_with(http.GET, expected_url)
+
+
+def test_get_registry_async():
+    asyncio.run(async_assets.get_registry())
+    async_assets.make_request.assert_called_with(http.GET, 'assets/registry')
+
+
+def test_get_registry_with_params_async():
+    asyncio.run(async_assets.get_registry(start_index=10, limit=20, sort_field='name', sort_dir='desc'))
+    async_assets.make_request.assert_called_with(
+        http.GET,
+        'assets/registry',
+        params={'start_index': 10, 'limit': 20, 'sort_field': 'name', 'sort_dir': 'desc'},
+    )
