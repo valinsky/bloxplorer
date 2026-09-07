@@ -5,7 +5,7 @@ with open('README.rst', 'r') as f:
 
 setuptools.setup(
     name='bloxplorer',
-    version='0.2.0',
+    version='0.2.1',
     description='Bitcoin blockchain explorer',
     long_description=readme,
     author='Vali Voicu',
