@@ -7,6 +7,7 @@ from bloxplorer.constants import (
 from bloxplorer.fees import AsyncFees, SyncFees
 from bloxplorer.issued_assets import AsyncIssuedAssets, SyncIssuedAssets
 from bloxplorer.mempool import AsyncMempool, SyncMempool
+from bloxplorer.mining import AsyncMining, SyncMining
 from bloxplorer.transactions import AsyncTransactions, SyncTransactions
 
 
@@ -19,6 +20,7 @@ class SyncExplorer:
         self.blocks = SyncBlocks(self.BASE_URL)
         self.fees = SyncFees(self.BASE_URL)
         self.mempool = SyncMempool(self.BASE_URL)
+        self.mining = SyncMining(self.BASE_URL)
 
     @property
     def base_url(self):
@@ -32,6 +34,7 @@ class AsyncExplorer(SyncExplorer):
         self.blocks = AsyncBlocks(self.BASE_URL)
         self.fees = AsyncFees(self.BASE_URL)
         self.mempool = AsyncMempool(self.BASE_URL)
+        self.mining = AsyncMining(self.BASE_URL)
 
 
 class SyncBitcoinExplorer(SyncExplorer):

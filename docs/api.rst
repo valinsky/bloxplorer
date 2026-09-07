@@ -9,8 +9,9 @@ multiple endpoints associated with the following resources:
 `Addresses <https://github.com/Blockstream/esplora/blob/master/API.md#addresses>`_,
 `Blocks <https://github.com/Blockstream/esplora/blob/master/API.md#blocks>`_,
 `Mempool <https://github.com/Blockstream/esplora/blob/master/API.md#mempool>`_,
-`Fee estimates <https://github.com/Blockstream/esplora/blob/master/API.md#fee-estimates>`_ and
-`Issued assets <https://github.com/Blockstream/esplora/blob/master/API.md#issued-assets-elementsliquid-only>`_.
+`Fee estimates <https://github.com/Blockstream/esplora/blob/master/API.md#fee-estimates>`_,
+`Issued assets <https://github.com/Blockstream/esplora/blob/master/API.md#assets-elementsliquid-only>`_, and
+`Mining <https://github.com/Blockstream/esplora/blob/master/API.md#mining>`_.
 
 Bloxplorer is a Python wrapper around these endpoints.
 
@@ -41,3 +42,4 @@ All the available resource methods are documented below:
     api/mempool
     api/fee_estimates
     api/issued_assets
+    api/mining

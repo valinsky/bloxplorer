@@ -29,6 +29,16 @@ def test_get_block_status_url_sync():
     sync_blocks.make_request.assert_called_with(http.GET, 'block/1234/status')
 
 
+def test_get_block_header_sync():
+    sync_blocks.get_header('1234')
+    sync_blocks.make_request.assert_called_with(http.GET, 'block/1234/header')
+
+
+def test_get_block_raw_sync():
+    sync_blocks.get_raw('1234')
+    sync_blocks.make_request.assert_called_with(http.GET, 'block/1234/raw')
+
+
 @pytest.mark.parametrize(
     'hash, start_index, expected_url', (
         ('1234', None, 'block/1234/txs'),
@@ -96,6 +106,16 @@ def test_get_block_status_url_async():
     hash = '1234'
     asyncio.run(async_blocks.get_status(hash))
     async_blocks.make_request.assert_called_with(http.GET, 'block/1234/status')
+
+
+def test_get_block_header_async():
+    asyncio.run(async_blocks.get_header('1234'))
+    async_blocks.make_request.assert_called_with(http.GET, 'block/1234/header')
+
+
+def test_get_block_raw_async():
+    asyncio.run(async_blocks.get_raw('1234'))
+    async_blocks.make_request.assert_called_with(http.GET, 'block/1234/raw')
 
 
 @pytest.mark.parametrize(

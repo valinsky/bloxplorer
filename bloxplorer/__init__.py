@@ -1,8 +1,7 @@
 from bloxplorer.explorers import (
     AsyncBitcoinExplorer, AsyncBitcoinSignetExplorer, AsyncBitcoinTestnetExplorer,
-    AsyncLiquidExplorer, AsyncLiquidTestnetExplorer, SyncBitcoinExplorer,
-    SyncBitcoinSignetExplorer, SyncBitcoinTestnetExplorer, SyncLiquidExplorer,
-    SyncLiquidTestnetExplorer
+    AsyncLiquidExplorer, AsyncLiquidTestnetExplorer, SyncBitcoinExplorer, SyncBitcoinSignetExplorer,
+    SyncBitcoinTestnetExplorer, SyncLiquidExplorer, SyncLiquidTestnetExplorer
 )
 
 """

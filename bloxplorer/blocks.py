@@ -34,6 +34,30 @@ class SyncBlocks(SyncRequest):
         """
         return self.make_request(http.GET, f'block/{hash}/status', **kwargs)
 
+    def get_header(self, hash, **kwargs):
+        r"""
+        Returns the hex-encoded block header.
+        The response from this endpoint can be cached indefinitely.
+
+        :param hash: String representing the block hash.
+        :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
+
+        :return: :class: `Response` object.
+        """
+        return self.make_request(http.GET, f'block/{hash}/header', **kwargs)
+
+    def get_raw(self, hash, **kwargs):
+        r"""
+        Returns the raw block representation in binary.
+        The response from this endpoint can be cached indefinitely.
+
+        :param hash: String representing the block hash.
+        :param \*\*kwargs: (Optional) Arguments that `Requests` takes.
+
+        :return: :class: `Response` object.
+        """
+        return self.make_request(http.GET, f'block/{hash}/raw', **kwargs)
+
     def get_txs(self, hash, start_index=None, **kwargs):
         r"""
         Returns a list of transactions in the block (up to 25 transactions beginning at start_index).
@@ -119,6 +143,12 @@ class AsyncBlocks(AsyncRequest):
 
     async def get_status(self, hash, **kwargs):
         return await self.make_request(http.GET, f'block/{hash}/status', **kwargs)
+
+    async def get_header(self, hash, **kwargs):
+        return await self.make_request(http.GET, f'block/{hash}/header', **kwargs)
+
+    async def get_raw(self, hash, **kwargs):
+        return await self.make_request(http.GET, f'block/{hash}/raw', **kwargs)
 
     async def get_txs(self, hash, start_index=None, **kwargs):
         path = f'block/{hash}/txs'
