@@ -3,7 +3,7 @@
 Issued Assets
 =============
 
-The Issued Assets class is available only for the Liquid explorer.
+The Issued Assets class is available only for the Liquid and Liquid Testnet explorers.
 
 Sync Usage
 **********

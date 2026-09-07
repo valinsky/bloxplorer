@@ -20,6 +20,7 @@ The explorers are instantiated with the following endpoint urls:
 * Bitcoin Testnet Explorer: https://blockstream.info/testnet/api/
 * Bitcoin Signet Explorer: https://blockstream.info/signet/api/
 * Liquid Explorer: https://blockstream.info/liquid/api/
+* Liquid Testnet Explorer: https://blockstream.info/liquidtestnet/api/
 
 After you import an explorer, you can use its methods by following this notation:
 

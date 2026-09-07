@@ -4,6 +4,7 @@ BITCOIN_API_BASE_URL = 'https://blockstream.info/api/'
 BITCOIN_TESTNET_API_BASE_URL = 'https://blockstream.info/testnet/api/'
 BITCOIN_SIGNET_API_BASE_URL = 'https://blockstream.info/signet/api/'
 LIQUID_API_BASE_URL = 'https://blockstream.info/liquid/api/'
+LIQUID_TESTNET_API_BASE_URL = 'https://blockstream.info/liquidtestnet/api/'
 
 DEFAULT_TIMEOUT = 5
 CONTENT_TYPE_JSON = 'application/json'
