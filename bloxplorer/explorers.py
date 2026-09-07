@@ -2,7 +2,7 @@ from bloxplorer.addresses import AsyncAddresses, SyncAddresses
 from bloxplorer.blocks import AsyncBlocks, SyncBlocks
 from bloxplorer.constants import (
     BITCOIN_API_BASE_URL, BITCOIN_SIGNET_API_BASE_URL, BITCOIN_TESTNET_API_BASE_URL,
-    LIQUID_API_BASE_URL
+    LIQUID_API_BASE_URL, LIQUID_TESTNET_API_BASE_URL
 )
 from bloxplorer.fees import AsyncFees, SyncFees
 from bloxplorer.issued_assets import AsyncIssuedAssets, SyncIssuedAssets
@@ -68,6 +68,22 @@ class SyncLiquidExplorer(SyncExplorer):
 
 class AsyncLiquidExplorer(AsyncExplorer):
     BASE_URL = LIQUID_API_BASE_URL
+
+    def __init__(self):
+        super().__init__()
+        self.assets = AsyncIssuedAssets(self.BASE_URL)
+
+
+class SyncLiquidTestnetExplorer(SyncExplorer):
+    BASE_URL = LIQUID_TESTNET_API_BASE_URL
+
+    def __init__(self):
+        super().__init__()
+        self.assets = SyncIssuedAssets(self.BASE_URL)
+
+
+class AsyncLiquidTestnetExplorer(AsyncExplorer):
+    BASE_URL = LIQUID_TESTNET_API_BASE_URL
 
     def __init__(self):
         super().__init__()

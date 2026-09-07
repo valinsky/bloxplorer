@@ -18,7 +18,7 @@ Usage
 After installation, you can import and use the desired explorer and its methods.
 Both sync and async methods are available.
 For a full list of available methods :ref:`click here <api>`.
-The available explorers are Bitcoin, Bitcoin Testnet, Bitcoin Signet and Liquid:
+The available explorers are Bitcoin, Bitcoin Testnet, Bitcoin Signet, Liquid and Liquid Testnet:
 
 Bitcoin Explorer
 ----------------
@@ -63,6 +63,16 @@ Liquid Explorer
     result = liquid_explorer.blocks.get_last_height()
     print(result.data)
     '412287'
+
+Liquid Testnet Explorer
+-----------------------
+
+.. code-block:: python
+
+    from bloxplorer import liquid_testnet_explorer
+
+    result = liquid_testnet_explorer.blocks.get_last_height()
+    print(result.data)
 
 Timeouts
 ********
